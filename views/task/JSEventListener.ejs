@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+            background-color: #F3D7CA;
+        }
+        table{
+            border:2px solid black;
+        }
+        td{
+            padding:15px;
+        }
+        .co{
+            background-color: #B6BBC4;
+        }
+        .co1{
+            background-color:#DCFFB7;
+        }
+        .co2{
+            background-color:#D24545 ;
+        }
+        .co3{
+            background-color:#647D87 ;
+        }
+        .co4{
+            background-color:#597E52;
+        }
+        .co5{
+            background-color:#A367B1;
+        }
+        .co,.co1,.co2,.co3,.co4,.co5{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td class="co2" id="onclick">onclick</td>
+            <td class="co3" id="ondblclick">ondblclick</td>
+            <td class="co4" id="onmousedown">onmousedown</td>
+            <td class="co5" id="onmousemove">onmousemove</td>
+            <td class="co1" id="onmouseout">onmouseout</td>
+           
+        </tr>
+        <tr>
+            
+            <td class="co5" id="onkeypress"><input type="text"><br>onkeypress</td>
+            <td class="co1" id="onkeyup"><input type="text"><br>onkeyup</td>
+            <td class="co2" id="onkeydown"><input type="text"><br>onkeydown</td>
+            <td colspan="2" class="co3" id="onfocus"><input type="text" onfocus="focusfun()"><br>onfocus</td>
+            
+           
+            
+        </tr>
+        <!--
+        <tr>
+            <td class="co3" id="ondrag" >ondrag</td>
+             <td class="co" id="ondrop">ondrop</td>
+            <td></td>
+            <td class="co2" id="ondragend">ondragend</td>
+            <td class="co1" id="ondragenter">ondragenter</td>
+            <td class="co4" id="ondragleave">ondragleave</td>
+            <td class="co3" id="ondragover">ondragover</td>
+            <td class="co1" id="ondragstart">ondragstart</td>
+        </tr>
+        -->
+        <tr>
+            <td class="co2" id="onmouseover">onmouseover</td>
+            <td class="co3" id="onmouseup">onmouseup</td>
+            <td class="co4" id="onblur"><input type="text" onblur="blurfun()"><br>onblur</td>
+            <td td colspan="2" class="co1" id="onload" onclick="clickload()">onload</td>
+        </tr>
+        <!--
+        <tr>
+            <td class="co4">onmousewheel</td>
+            <td class="co5">onwheel</td>
+            <td class="co2">onscroll</td>
+        </tr>
+        -->
+    </table>
+    <script>
+        var Events=["click","dblclick","mousedown","mousemove","mouseout","mouseover","mouseup","keypress","keyup","keydown","focus","blur"]
+        for(let i=0;i<Events.length;i++){
+            let eventi = document.getElementById("on"+Events[i]);
+            eventi.addEventListener(Events[i],()=>{
+                alert("on"+Events[i]+ " triggerd");
+            });
+            function blurfun(){
+                alert("onblur triggerd");
+            }
+            function focusfun(){
+                alert("onfocus triggerd");
+            }
+        }
+        function clickload(){
+            location.reload();
+        }
+    </script>
+</body>
+</html>

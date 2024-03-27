@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #9EB8D9;
+        }
+
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+            margin: auto;
+            margin-top: 100px;
+        }
+
+        td {
+            border: 2px solid black;
+            width: 30px;
+            height: 30px;
+        }
+
+        #count {
+            float: left;
+        }
+
+        table {
+            position: relative;
+            bottom: 100px;
+        }
+    </style>
+</head>
+
+<body onload="handleBox()">
+    <center>
+        <h2>4DEV058 - Darshan Parekh</h2>
+        <div>Game Over in <span id="time">00:10</span> seconds!</div>
+    </center>
+    <br>
+    <div>Highest Score: <span id="score"></span></div>
+    <table id="table">
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <br>
+    <!--<div id="start" onclick="nextColor()"><h2>Start</h2></div>-->
+    <script>
+        var value = 0;
+        var color = ["#7FC7D9", "#365486", "#11009E", "#4F6F52", "#33186B", "#820300", "#092635", "#191919"];
+        function handleBox() {
+            //startTimer();
+            // var color=[red,blue,yellow,grey];
+            table = document.getElementsByTagName("table");
+            td = table[0].getElementsByTagName("td");
+            var randomBox = Math.floor(Math.random() * (td.length - 0));
+            for (let i = 0; i < td.length; i++) {
+
+                if (i === randomBox) {
+
+                    td[i].style.backgroundColor = color[randomBox % 8];
+                    td[i].style.opacity = 0.5;
+                }
+                else {
+                    td[i].style.opacity = 1;
+                    td[i].style.backgroundColor = color[randomBox % 8];
+
+                    td[i].removeEventListener("click", handleInsert);
+                }
+            }
+            td[randomBox].addEventListener("click", handleInsert);
+        }
+        function gameover() {
+            alert("Your score is " + value + " Game Over!!!");
+            alert("You want to play again!");
+            printValue();
+            //location.reload();
+            removeRowColumns();
+            value=0;
+            handleBox();
+            startTimer(12, 10);
+           // startTimer(10, 10);
+            setInterval(gameover, 1000 * 12);
+
+        }
+        function removeRowColumns() {
+            var table = document.getElementsByTagName("table");
+            if (table[0].rows.length > 2) {
+                //  alert("Hello!");
+
+                for (let i = table[0].rows.length; i > 2; i--) {
+                    table[0].deleteRow(table.row - 1);
+
+                }
+
+            }
+            var table = document.getElementById("table");
+            var tableCellCount = table.rows[0].cells.length;
+            var row = table.rows;
+            var i = 0;
+            while (tableCellCount>2) {
+                if (tableCellCount > 2) {
+                    for (let i = 0; i < row.length; i++) {
+                        row[i].deleteCell(table.rows[i].cells.length - 1);
+                    }
+                }
+                tableCellCount--;
+            }
+        }
+        var timearr = [];
+        var Hscore;
+        function printValue() {
+            timearr.push(value);
+            for (let i = 0; i < timearr.length; i++) {
+                for (let j = 0; j < timearr.length - 1; j++) {
+                    if (timearr[j] > timearr[j + 1]) {
+                        let swap = 0;
+                        swap = timearr[j];
+                        timearr[j] = timearr[j + 1];
+                        timearr[j + 1] = swap;
+                    }
+                }
+            }
+          //  timearr.sort();
+            Hscore = timearr[timearr.length - 1];
+            document.getElementById("score").innerHTML = Hscore;
+        }
+
+        function handleInsert() {
+            handleColumnInsert();
+            handleRowInsert();
+            handleBox();
+            value++;
+            console.log(value);
+        }
+        function handleRowInsert() {
+            table = document.getElementsByTagName("table");
+            tr = table[0].getElementsByTagName("tr");
+            td = tr[0].getElementsByTagName("td");
+            table[0].appendChild(document.createElement("tr"));
+            for (let i = 0; i < td.length; i++) {
+                table[0].lastChild.appendChild(document.createElement("td"));
+            }
+        }
+        function handleColumnInsert() {
+            table = document.getElementsByTagName("table");
+            tr = table[0].getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                tr[i].appendChild(document.createElement("td"));
+            }
+        }
+
+
+        function startTimer(duration, display) {
+            handleBox();
+            var timer = duration, seconds;
+            setInterval(function () {
+                seconds = parseInt(timer % 10, 10);
+
+                //minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        window.setInterval(gameover, 1000 * 12);
+
+
+        window.onload = function () {
+            var fiveMinutes = 60 * 1,
+                display = document.querySelector('#time');
+            startTimer(fiveMinutes, display);
+        };
+    </script>
+</body>
+
+</html>

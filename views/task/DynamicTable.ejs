@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+        }
+        table{
+            border:2px solid black;
+        }
+        td{
+            width: 70px;
+            height: 70px;
+            margin:10px;
+            border: 1px solid black;
+        }
+        .flex-container{
+            display:flex;
+            position: relative;
+            left: 540px;
+            margin:20px;
+        }
+        tr:nth-of-type(even) td:nth-of-type(odd),
+        tr:nth-of-type(odd) td:nth-of-type(even){background-color: #E6A4B4;}
+
+        tr:nth-of-type(even) td:nth-of-type(even),
+        tr:nth-of-type(odd) td:nth-of-type(odd){background-color: #F3D7CA;}
+        .btn1{
+            padding:30px;
+            background-color: #474F7A;
+            margin:10px;
+        }
+        .btn{
+           padding:30px;
+            margin:10px;
+            background-color: #6D2932;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h2>4DEV058 - Darshan Parekh</h2>
+        <br>
+        <h2>Row Manipulation</h2>
+        <div class="flex-container">
+            <div onclick="addRow()" class="btn1">+</div>
+            <div onclick="remRow()" class="btn">-</div>
+        </div>
+        <table id="table">
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <h2>Column Manipulation</h2>
+        <div class="flex-container">
+            <div onclick="addColumn()" class="btn1">+</div>
+            <div onclick="remColumn()" class="btn">-</div>
+        </div>
+    </center>
+
+    
+    <script>
+        
+        const addRow=()=>{
+            var table = document.getElementById("table");
+            var cell = table.insertRow(1);
+            var tableCellCount = table.rows[0].cells.length;
+            console.log(tableCellCount);
+            for(let  i=0;i<tableCellCount;i++){
+                cell.insertCell(i);
+            }
+        }
+        const remRow=()=>{
+            var table = document.getElementById("table");
+            if(table.rows.length>2){
+                table.deleteRow(table.row-1);
+            }
+            else{
+                alert("Row must greter then 2 row ");
+            }
+        }
+        const addColumn=()=>{
+            var table = document.getElementById("table");
+            var row=table.rows;
+            console.log(row);
+            for(let i=0;i<row.length;i++){
+                row[i].insertCell(table.rows[i].cells.length-1);
+            }
+        }
+        const remColumn=()=>{
+            var table = document.getElementById("table");
+            var tableCellCount = table.rows[0].cells.length;
+            var row=table.rows;
+            var i=0;
+            if(tableCellCount>2){
+                for(let i=0;i<row.length;i++){
+                row[i].deleteCell(table.rows[i].cells.length-1);
+                }
+            }
+            else{
+                alert("Row must greter then 2 row ");
+            }
+        }
+    </script>
+</body>
+</html>

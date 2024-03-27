@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algo</title>
+    <style>
+        .header {
+            position: relative;
+            left: 350px;
+        }
+
+        .header2 {
+            position: relative;
+            left: 115px;
+            bottom: 70px;
+        }
+
+        .header1 {
+            position: relative;
+            left: 215px;
+            bottom: 10px;
+        }
+        #print{
+            position: relative;
+            top:25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header1">
+            <h1>Sorting</h1>
+        </div>
+        <br><br>
+        <div class="header2">
+            <h2>4DEV058 - Darshan Parekh</h2>
+            <br>
+            <h2>Enter a number:</h2>
+            <input type="text" name="number" id="number"><button id="btn" onclick="sort()">Sort</button>
+            <div id="print"></div>
+        </div>
+        
+    </div>
+   
+    <script>
+
+        //var arr=[8,7,4,1,10,15,22,2,3,9];
+        //document.write(arr);
+        //Bubble Sort
+        function sort() {
+            var number = document.getElementById("number").value;
+            var arr = [];
+            arr = number.split(",");
+            for (let i = 0; i < arr.length; i++) {
+                arr[i] = arr[i] * 1;
+            }
+            console.log(arr);
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr.length - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let swap = 0;
+                        swap = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = swap;
+                    }
+                }
+            }
+           // document.write(arr);
+            document.getElementById("print").innerHTML=arr;
+        }
+
+
+
+    </script>
+</body>
+
+</html>
