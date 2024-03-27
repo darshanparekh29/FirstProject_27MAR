@@ -13,5 +13,8 @@ router.get("/task",(req,res)=>{
     if(taskName=="DynamicTable"){
         res.render("task/DynamicTable.ejs");
     }
+    else if(taskName=="kukuCube"){
+        res.render("task/cucuCube.ejs");
+    }
 })
 module.exports = { router };
