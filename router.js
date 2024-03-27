@@ -16,5 +16,8 @@ router.get("/task",(req,res)=>{
     else if(taskName=="kukuCube"){
         res.render("task/cucuCube.ejs");
     }
+    else if(taskName=="jsEvent"){
+        res.render("task/JSEventListener.ejs");
+    }
 })
 module.exports = { router };
