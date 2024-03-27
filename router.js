@@ -22,8 +22,8 @@ router.get("/task",(req,res)=>{
     else if(taskName=="tictac"){
         res.render("task/ticToe.ejs");
     }
-    else if(taskName=="tictac"){
-        res.render("task/ticToe.ejs");
+    else if(taskName=="sort"){
+        res.render("task/sort.ejs");
     }
 })
 module.exports = { router };
