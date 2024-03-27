@@ -19,5 +19,11 @@ router.get("/task",(req,res)=>{
     else if(taskName=="jsEvent"){
         res.render("task/JSEventListener.ejs");
     }
+    else if(taskName=="tictac"){
+        res.render("task/ticToe.ejs");
+    }
+    else if(taskName=="tictac"){
+        res.render("task/ticToe.ejs");
+    }
 })
 module.exports = { router };
