@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Data</title>
+</head>
+<style>
+    .footerMain{
+        display: flex;
+       justify-content: center;
+       align-items: center;
+       margin:20px 0px;
+    }
+    .foot{
+        margin:5px 10px;
+    }
+    .btn{
+        font-size: 30px;
+        background-color: aqua;
+        border-radius: 5px;
+        padding:3px 7px;
+        cursor: pointer;
+    }
+    .btn:hover{
+        background-color:aquamarine;
+    }
+    table,
+        tr,
+        th,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+
+        th {
+            background-color: #04AA6D;
+            color: white;
+            height: 40px;
+        }
+        table tr:nth-child(even){background-color: #f2f2f2;}
+
+        table tr:hover {background-color: #ddd;}
+        .Container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+</style>
+<body>
+    
+    <h3 id="Textfilter"> <%=a%> </h3>
+    <form action="/task" method="get">
+        <label for="filters">Choose a filter:</label>
+        <select name="filter" id="filter">
+          <option value="first_name">First Name</option>
+          <option value="last_name">Last Name</option>
+          <option value="DOB">DOB</option>
+          <option value="created_at">Created at</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit" onclick="addFilter()">
+      </form>
+    <h1 style="text-align: center;">Students Master</h1>
+    <div class="Container">
+        <table>
+            <thead>
+                <% data1.map((e)=>{ %>
+                    <th>
+                        <%= e.Field %>
+                    </th>
+                    <% }); %>
+            </thead>
+
+
+            <% data2.map((e)=>{ %>
+                <tr>
+
+                    <td>
+                        <%=e.student_id%>
+                    </td>
+                    <td>
+                        <%=e.first_name%>
+                    </td>
+                    <td>
+                        <%=e.last_name%>
+                    </td>
+                    <td>
+                        <%=e.father_name%>
+                    </td>
+                    <td>
+                        <%=e.mother_name%>
+                    </td>
+                    <td>
+                        <%=e.gender%>
+                    </td>
+                    <td>
+                        <%=e.email%>
+                    </td>
+                    <td>
+                        <%=e.city%>
+                    </td>
+                    <td>
+                        <%=e.p_number%>
+                    </td>
+                    <td>
+                        <%=e.em_number%>
+                    </td>
+                    <td>
+                        <%=e.DOB%>
+                    </td>
+                    <td>
+                        <%=e.created_at%>
+                    </td>
+
+                </tr>
+                <% }); %>
+        </table>
+    </div>
+    <div class="footerMain">
+        <div class="PageStart foot btn" onclick="onfirst()"> << </div>
+        <div class="PageLeft foot btn" onclick="changePage(-1)"> < </div>
+        <div class="PageNumber foot pageCount" id="pageCount"><%=page %></div>
+        <div class="PageRight foot btn" onclick="changePage(1)"> > </div>
+        <div class="PageEnd foot btn" onclick="onlast()"> >> </div>
+    </div>
+    <script>
+        let currentPage =1;
+        let minPage=1;
+        let MaxPage=10;
+
+        function addFilter(){
+            var futureFilter=document.getElementById("filter").value;
+           // currentFilter=document.getElementById("Textfilter").innerHTML;
+            document.getElementById("Textfilter").innerHTML=futureFilter;
+        }
+        function changePage(val){
+            currentPage =Number(document.getElementById("pageCount").innerHTML);
+            //currentFilter=document.getElementById("filter").innerHTML;
+
+            currentPage = currentPage + val;
+
+            if(currentPage<1 || currentPage>10){
+                return 0;
+            }
+            var futureFilter=document.getElementById("Textfilter").innerHTML;
+            window.location=`http://localhost:8081/task?taskName=PaginationWithOrderBy&page=${currentPage}&filter=${futureFilter}`;
+        }
+
+        function onfirst(){
+            currentPage =Number(document.getElementById("pageCount").innerHTML);
+        
+            if(currentPage==1){
+                return 0;
+            }
+           // currentFilter=document.getElementById("filter").innerHTML;
+           var futureFilter=document.getElementById("Textfilter").innerHTML;
+            window.location=`http://localhost:8081/task?taskName=PaginationWithOrderBy&page=${minPage}&filter=${futureFilter}`;
+        }
+        function onlast(){
+            currentPage =Number(document.getElementById("pageCount").innerHTML);
+           
+            if(currentPage==10){
+                return 0;
+            }
+          var futureFilter=document.getElementById("Textfilter").innerHTML;
+            window.location=`http://localhost:8081/task?taskName=PaginationWithOrderBy&page=${MaxPage}&filter=${futureFilter}`;
+        }
+    </script>
+
+</body>
+
+</html>
