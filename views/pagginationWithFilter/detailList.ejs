@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DetailList</title>
+    <style>
+        .Container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.btn {
+    background-color: #561C24;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 15px;
+    text-align: center;
+    display: inline-block;
+}
+.InnerContainer{
+    display: flex;;
+    text-align: center;
+    justify-content: center;
+}
+.btn:hover {
+    background-color: #6D2932;
+}
+table,
+        tr,
+        th,
+        td {
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+        th,td{
+            padding:3px 10px;
+            text-align: center;
+        }
+        table{
+            width:85%;
+        }
+        .Container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        th, #headTr>td {
+            background-color: #04AA6D;
+            color: white;
+            height: 40px;
+        }
+        table tr:nth-child(even){background-color: #f2f2f2;}
+
+        table tr:hover {background-color: #ddd;}
+        .Container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .footerMain{
+            display: flex;
+           justify-content: center;
+           align-items: center;
+           margin:20px 0px;
+        }
+        .foot{
+            margin:5px 10px;
+        }
+        .btn{
+            font-size: 20px;
+            background-color: #A5DD9B;
+            border-radius: 100%;
+            padding:8px 8px;
+            cursor: pointer;
+        }
+        .pageCount{
+            font-size: 30px;
+            background-color: #C5EBAA;
+            border-radius: 100%;
+            padding:15px 15px;
+            cursor: pointer;
+        }
+        .btn:hover{
+            transform: scale(1.2);
+            background-color:#C5EBAA;
+        }
+        .btn1{
+            cursor: pointer;
+            background-color: #9BCF53;
+            padding:5px 10px;
+            border-radius: 2px;;
+            color:white;
+        }
+        .btn1:hover{
+            color:black;
+            background-color: #BFEA7C;
+        }
+        .btn2,.home{
+            cursor: pointer;
+            background-color: #1F2544;
+            padding:5px 10px;
+            border-radius: 2px;;
+            color:white;
+            margin-bottom:10px;
+        }
+        .btn2:hover{
+            color:black;
+            background-color: #474F7A;
+        }
+        .home:hover{
+            color:black;
+            background-color: #474F7A;
+        }
+
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        h3{
+            padding:15px 0px 15px 0px;
+        }
+        h2{
+            padding:0px 0px 25px 0px;
+        }
+.data1{
+    margin:7px 6px 0px 0px;;
+    font-size: 12px;;
+}
+.rowHead{
+    
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.arrowUp:hover{
+    transform: scale(1.20);
+}
+.arrowDown:hover{
+    transform: scale(1.20);
+}
+.arrowUp{
+    margin-bottom:-3px;
+    size:5px;
+}
+.arrowDown{
+    margin-top:-3px;;
+}
+#arrow{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+    </style>
+
+</head>
+
+
+<body>
+    <div class="Container">
+        <h3>24DEV058-Darshan Parekh</h3>
+        <div class="InnerContainer">
+            <input type="text" name="enterQuery" id="query" placeholder="Enter a Query">
+            <div class="btn" onclick="fireQuery()">GO</div>
+        </div>
+
+        <p id="order">
+            <%=order%>
+        </p>
+        <p id="column">
+            <%=orderBy%>
+        </p>
+
+        <%var head=data2[0].table.split("_");%>
+            <h2>
+                <% head.map((e)=>{ %>
+                    <%=e+" "%>
+            <% }) %>
+        </h2>
+        <div class=" home" id="home" onclick="goHome()">Home
+    </div>
+    <table>
+        <%data2.map((e)=>{ %>
+            <% var a=1; %>
+                <th>
+                    <div class="rowHead" id="rowHead">
+                        <div class="data1">
+                            <%=e.name%>
+                        </div>
+
+
+                        <div id="arrow">
+                            <div class="arrowUp" onclick="OrderAec(`<%=e.name%>`)" id="inc"+ <%=e.name%>"><img
+                                    src="/pagginationWithFilter/arrow-up-short.svg" alt=""></div>
+                            <div class="arrowDown" onclick="OrderDesc(`<%=e.name%>`)" id="dec"+<%=e.name%>"><img
+                                    src="/pagginationWithFilter/arrow-down-short.svg" alt=""></div>
+                        </div>
+                    </div>
+                </th>
+                <% a++; %>
+                    <% }) %>
+
+
+                        <% data1.map((e)=>{%>
+                            <tr>
+                                <% data2.map((fields)=>{ %>
+                                    <td>
+                                        <%=e[fields.name]%>
+                                    </td>
+                                    <% }) %>
+                            </tr>
+                            <%});%>
+
+    </table>
+    <div class="footerMain">
+        <div class="PageStart foot btn" id="PageStart" onclick="onfirst()">
+            << </div>
+                <div class="PageLeft foot btn" id="PageLeft" onclick="changePage(-1)"> <%=parseInt(page)-1%> </div>
+                <div class="PageNumber foot pageCount" id="pageCount">
+                    <%=page %>
+                </div>
+                <div class="PageRight foot btn" id="PageRight" onclick="changePage(1)">
+                    <%=parseInt(page)+1%>
+                </div>
+                <div class="PageEnd foot btn" id="PageEnd" onclick="onlast()"> >> </div>
+        </div>
+    </div>
+    <script>
+        function fireQuery() {
+            var a = document.getElementById("query");
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithFilter&query=${a.value}&secondP=1`;
+            //  console.log(a.value);
+        }
+
+        var minPages = 1;
+        var maxPages = `<%=requirePages%>`;
+        currentPage = 1;
+
+        function goHome() {
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithFilter&`;
+        }
+
+        currentPage = Number(document.getElementById("pageCount").innerHTML);
+        if (currentPage == 1) {
+            document.getElementById("PageStart").style.display = "none";
+            document.getElementById("PageLeft").style.display = "none";
+        }
+        else if (currentPage == maxPages) {
+            document.getElementById("PageRight").style.display = "none";
+            document.getElementById("PageEnd").style.display = "none";
+        }
+
+        function changePage(val) {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+            currentPage = currentPage + val;
+
+            if (currentPage > maxPages || currentPage < 1) {
+                return 0;
+            }
+            // window.location = `http://localhost:8081?page=${currentPage}&query=${`<%=sql1%>`}&parms=1&secondP=1`;
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithFilter&page=${currentPage}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${orderBy}&order=${order}`;
+
+        }
+
+        function onfirst() {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+            if (currentPage <= 1) {
+                return 0;
+            }
+            // window.location = `http://localhost:8081?page=${minPages}&query=${`<%=sql1%>`}&parms=1&secondP=1`;
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithFilter&page=${minPages}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${orderBy}&order=${order}`;
+        }
+        function onlast() {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            if (currentPage >= maxPages) {
+                return 0;
+            }
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithFilter&page=${maxPages}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${orderBy}&order=${order}`;
+
+            /*
+            window.location = `http://localhost:8081/?page=${maxPages}&query=${`<%=sql1%>`}&parms=1&secondP=1`;*/
+        }
+        // const order = document.getElementById('order').innerHTML || asc;
+        // const value = document.getElementById('column').innerHTML;
+        // if(order=="asc"){    
+        //     var stopOrder = "inc"+value;
+        //     console.log(stopOrder);
+        //     // let displayNone = document.getElementById(stopOrder);
+        //     // displayNone.style.display="none";
+        // }
+        // else{
+        //     console.log(stopOrder);
+        //     var stopOrder = "dec"+value;
+        //     // let displayNone = document.getElementById(stopOrder);
+        //     // displayNone.style.display="none";
+        // }
+        function OrderAec(value) {
+
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+            let column = value;
+            let o;
+            console.log(order);
+            console.log(orderBy);
+            console.log(column);
+            if (order == "DESC") {
+                o = "ASC";
+            }
+            if (order == "ASC") {
+                o = "DECS";
+            }
+            else{
+                o="ASC";
+            }
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithFilter&page=${minPages}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${column}&order=${o}`;
+        }
+        function OrderDesc(value) {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+            let column = value;
+            console.log(order);
+            console.log(orderBy);
+            console.log(column);
+
+            let o;
+
+            if (order == "ASC") {
+                o = "DESC";
+            }
+            if (order == "DESC") {
+                o = "ASC";
+            }
+            else{
+                o="DESC";
+            }
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithFilter&page=${minPages}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${column}&order=${o}`;
+        }
+        
+    </script>
+</body>
+
+</html>

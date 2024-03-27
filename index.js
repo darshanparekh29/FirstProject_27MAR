@@ -4,6 +4,7 @@ var app = express();
 var {router} = require ("./router");
 app.set("view engine","ejs");
 app.use(express.static(__dirname+'/views'));
+app.use(express.static(__dirname+'/pagginationWithFilter'));
 app.use(express.urlencoded({extended:true}));
 
 const PORT = 8081;
