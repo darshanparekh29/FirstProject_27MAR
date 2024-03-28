@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="con">
+        <div class="Container" id="Container">
+            <div id="subCon1">
+                <img src="Designer _Flatline 1.png" alt="">
+            </div>
+            <div id="subCon2" class="ContainerLogin">
+                <h2 id="register">Register!!!</h2>
+                <form id="form">
+                    <div id="form1">
+                        <div class="formdesign" id="first_name">
+                            <input type="text" name="fname" placeholder="First Name:">
+                            <br><span class="formerror"><b></b></span>
+                        </div>
+                        <div class="formdesign" id="last_name">
+                            <input type="text" name="lname" placeholder="Last Name:"><br>
+                            <span class="formerror"><b></b></span>
+                        </div>
+                        <div class="formdesign" id="email">
+                            <input type="text" name="email" placeholder="Email:"><br>
+                            <span class="formerror"><b></b></span>
+                        </div>
+                        <div class="formdesign" id="number">
+                            <input type="text" name="number" placeholder="Mobile Number:"><br>
+                            <span class="formerror"><b></b></span>
+                        </div>
+                        <div class="formdesign" id="subbtn">
+                            <div class="btn" onclick="register()">Submit</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div style="display:none" id="linkDiv">
+            <h4> Get activate : </h4><a href="" id="link"></a>
+        </div>
+    </div>
+
+    <script>
+        const isStringLowerCase = (str1) => {
+            var returnVal = true;
+            if (str1 !== str1.toLowerCase()) {
+                returnVal = false;
+            }
+            return returnVal;
+        }
+        function clearerrors() {
+            element = document.getElementsByClassName("formerror");
+            for (let item of element) {
+                item.innerHTML = "";
+            }
+        }
+        const seterror = (id, error) => {
+            var a = document.getElementById(id);
+            var b = a.getElementsByClassName("formerror")[0];
+            b.innerHTML = error;
+        }
+        function formValidate() {
+            var returnVal = true;
+            clearerrors();
+            var fname = document.getElementsByName("fname");
+            var stringRegex = /^[a-zA-Z]+$/;
+            if (fname[0].value == "" || fname[0].value == undefined) {
+                seterror("first_name", "please set First Name!!");
+                returnVal = false;
+            }
+            // console.log(stringRegex.test(fname)==false)
+            else if (stringRegex.test(fname[0].value) == false) {
+                seterror("first_name", "please enter valid First Name!!");
+                returnVal = false;
+            }
+
+            var lname = document.getElementsByName("lname");
+            if (lname[0].value == "" || lname[0].value == undefined) {
+                seterror("last_name", "please set Last Name!!");
+                returnVal = false;
+            }
+            else if (stringRegex.test(lname[0].value) == false) {
+                seterror("last_name", "please enter valid Last Name!!");
+                returnVal = false;
+            }
+
+            var email = document.getElementsByName("email");
+            var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (email[0].value == "" || email[0].value == undefined) {
+                seterror("email", "please set email!!");
+                returnVal = false;
+            }
+            else if (isStringLowerCase(email[0].value) == false) {
+                seterror("email", "please enter email in lowercase!!");
+                returnVal = false;
+            }
+            else if (emailRegex.test(email[0].value) == false) {
+                seterror("email", "please enter valid email!!");
+                returnVal = false;
+            }
+
+            var phoneRegex = /^[0-9]{10}/;
+            var number = document.getElementsByName("number");
+            if (number[0].value == "") {
+                seterror("number", "please fill number!!");
+                returnVal = false;
+            }
+            else if (phoneRegex.test(number[0].value) == false) {
+                seterror("number", "please enter valid Phone Number!!");
+                returnVal = false;
+            }
+            return returnVal;
+        }
+        var digitalLink;
+        const submitForm = async () => {
+            var rertunVal = true;
+
+            let form = document.getElementById("form");
+            let formdata = new FormData(form);
+            const params = new URLSearchParams(formdata);
+            const response1 = await new Response(params).text();
+            const response2 = response1 + "&firstValid=false";
+            console.log(response2);
+            await fetch(`http://localhost:8081/action`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: response2,
+            }).then(async (response) => {
+                var res1 = await response.json()
+                
+                digitalLink = `http://localhost:8081/?userID=${res1.data3}&digiLink=${res1.data2}&linkValidation=true`;
+                document.getElementById("link").innerHTML = digitalLink;
+                
+            }).catch((e)=>{
+                console.log(e);
+            })
+            return rertunVal;
+        }
+        const checkCrendatial = async() => {
+            var rertunVal = true;
+
+            let form = document.getElementById("form");
+            let formdata = new FormData(form);
+            const params = new URLSearchParams(formdata);
+            const response1 = await new Response(params).text();
+            const response2 = response1 + "&firstValid=true";
+           // console.log(response2);
+            await fetch(`http://localhost:8081/action2`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: response2,
+            }).then(async (response) => {
+
+                var res1 = await response.json()
+               // console.log("dasdsa"+res1.data1);
+                if (res1.data1) {
+                    rertunVal = false;
+                    seterror("number", "User is alerdy exist!!");
+                }
+            });
+            return rertunVal;
+        }
+        const register = async () => {
+            if (formValidate()==true && await checkCrendatial()==true) {
+                console.log("dasd");
+                await submitForm();
+                document.getElementById("linkDiv").style.display = "block";
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

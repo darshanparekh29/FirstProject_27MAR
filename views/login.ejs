@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="con">
+        <div class="Container" id="Container5">
+            <div id="subCon1">
+                <img src="/Designer _Flatline 1.png" alt="">
+            </div>
+            <div class="ContainerLogin" id="ContainerLogin2">
+                <div id="main">
+                    <h2 id="register">Login!!!</h2>
+                    <br>
+                    <span class="formerror"><b></b></span>
+                </div>
+                <form id="form">
+                    <div class="formdesign" id="email">
+                        <input type="text" name="email" placeholder="Email:"><br>
+                        <span class="formerror"><b></b></span>
+                    </div>
+                    <div class="formdesign" id="pass1">
+                        <input type="password" name="pass1" placeholder="Password:"><br>
+                        <span class="formerror"><b></b></span>
+                    </div>
+                    <div class="formdesign" id="subbtn">
+                        <div class="btn" onclick="onSubmit()">Submit</div>
+                    </div>
+                    <div class="formdesign" id="forgetPass">
+                        <div class="btn1" onclick="onForget()">Forget Password</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="Container2" id="Container2" style="display: none;">
+            <h2>Welcome Buddy!!</h2>
+        </div>
+
+
+    </div>
+</body>
+<script>
+    const onForget=()=>{
+        window.location=`http://localhost:8081/forgetPass`;
+    }
+    function clearerrors() {
+        element = document.getElementsByClassName("formerror");
+        for (let item of element) {
+            item.innerHTML = "";
+        }
+    }
+    const seterror = (id, error) => {
+        var a = document.getElementById(id);
+        var b = a.getElementsByClassName("formerror")[0];
+        b.innerHTML = error;
+    }
+    const isStringLowerCase=(str1)=>{
+        var returnVal = true;
+        if(str1!==str1.toLowerCase()){
+             returnVal = false;
+        }
+        return returnVal;
+    }
+    const formValidate = () => {
+        var returnVal = true;
+        var email = document.getElementsByName("email")[0].value;
+      //  var emailRegex2 = /^(?=.*[a-z])(?=.*\\d)” + “(?=.*[-+_!@#$%^&*., ?]).+$/;
+        var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (email == "" ||email == undefined) {
+            seterror("email", "please set email!!");
+            returnVal = false;
+        }
+        else if(isStringLowerCase(email) == false){
+            seterror("email", "please enter email in lowercase!!");
+            returnVal = false;
+        }
+        else if (emailRegex.test(email) == false) {
+            seterror("email", "please enter valid email!!");
+            returnVal = false;
+        }
+        return returnVal;
+    }
+    const onSubmit = async () => {
+        if (formValidate()) {
+            let form = document.getElementById("form");
+            let formdata = new FormData(form);
+            const params = new URLSearchParams(formdata);
+            const response1 = await new Response(params).text();
+
+            await fetch(`http://localhost:8081/checkLogin`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: response1,
+            }).then(async (response) => {
+                var res = await response.json()
+                if (res.data == undefined) {
+                    if (res.data1 == false) {
+                        console.log(res.data2);
+                        seterror("main", res.data2);
+                    }
+                    else {
+                        document.getElementById("Container5").style.display = "none";
+                        document.getElementById("Container2").style.display = "block";
+                        window.location=`http://localhost:8081/Home`;
+                    }
+                }
+                else{
+                    console.log("error",res.data.error);
+                    seterror("email",res.data.error);
+                }
+
+            })
+        }
+    }
+</script>
+
+</html>

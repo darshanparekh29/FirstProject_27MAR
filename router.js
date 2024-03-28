@@ -1,13 +1,340 @@
 var express = require("express");
 var router = express.Router();
-//var middelware = require("./formValidator");
-var con = require("./connection");
-var fs = require("fs");
+var middelware = require("./formValidator");
+var con = require("./Connect");
 var app = express();
-//var md5 = require('md5');
+var fs = require("fs");
+var md5 = require('md5');
+var jwt = require("jsonwebtoken");
+const checkToken = require("./tokenVerify");
+
+
+router.get("/Home",checkToken,(req,res)=>{
+    res.render("index.ejs");
+})
 
 router.get("/", (req, res) => {
-    res.render("index.ejs");
+
+    const checkLinkTime = (result) => {
+        var returnVal = true;
+        const date1 = new Date(result);
+        const date2 = new Date();
+        var diff = (date2.getTime() - date1.getTime()) / 1000;
+        if (diff > 120) {
+            returnVal = false;
+        }
+        return returnVal;
+    }
+
+    var linkValidation = req.query.linkValidation || false;
+    console.log(linkValidation);
+
+    if (linkValidation) {
+        var userID = req.query.userID;
+        var digiLink = req.query.digiLink;
+
+        var sql1 = `SELECT created_at,digit FROM user_table2 WHERE id=${userID};`;
+        con.con.query(sql1, function (err, result) {
+            if (err) throw err;
+            console.log(result);
+            if (result[0].length == 0) {
+                //res.json({dataError:true});
+                console.log("Token has been experied!!");
+                res.render("tokenExpired.ejs");
+            }
+            else {
+                if (checkLinkTime(result[0].created_at)) {
+                    if (result[0].digit === digiLink) {
+                        res.render("cPassword.ejs", { digitalLink: digiLink, userId: userID });
+                    }
+                    else {
+                        console.log("Token has been experied!!");
+                        res.render("tokenExpired.ejs");
+                    }
+                }
+                else {
+                    // res.json({dataError:true});
+                    console.log("Token has been experied!!");
+                    res.render("tokenExpired.ejs");
+                }
+            }
+        });
+
+    }
+    else {
+        res.render("register.ejs", { data1: false });
+    }
+
+});
+router.post("/postPassword", (req, res) => {
+
+    function createRandomString(length) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let result = "";
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    const checkLinkTime = (result) => {
+        var returnVal = true;
+        const date1 = new Date(result);
+        const date2 = new Date();
+        var diff = (date2.getTime() - date1.getTime()) / 1000;
+        if (diff > 120) {
+            returnVal = false;
+        }
+        return returnVal;
+    }
+
+    var userID = req.body['userID'];
+    var digilink = req.body['digilink'];
+
+    var sql1 = `SELECT created_at,digit FROM user_table2 WHERE id=${userID}`;
+    con.con.query(sql1, function (err, result) {
+        if (err) throw err;
+        if (result[0].digit == digilink && checkLinkTime(result[0].created_at)) {
+            var salt = createRandomString(4);
+            var pass = req.body['pass1'];
+            var passSalt = pass + salt;
+            var hPass = md5(passSalt);
+            var sql2 = `UPDATE user_table2 SET pass = '${hPass}',salt = '${salt}' WHERE (id = ${userID});`;
+            con.con.query(sql2, function (err, result) {
+                if (err) throw err;
+                console.log("data has been inserted!!");
+                res.json({ data: "success" });
+            });
+        }
+    });
+})
+router.post("/action2", (req, res) => {
+
+    var email = req.body['email'];
+    var number = req.body['number'];
+
+    var sql2 = `SELECT * FROM user_table2 WHERE email='${email}' OR num=${number};`;
+    console.log(sql2);
+    con.con.query(sql2, function (err, result) {
+        var isError = false;
+        if (err) throw err;
+        //console.log(result+"sdfAS");
+        if (result.length != 0) {
+            isError = true;
+            res.json({ data1: isError });
+        }
+        else {
+            //console.log("Helloi!");
+            res.json({ data1: isError });
+        }
+    });
+
+})
+router.post("/action", middelware.formValidator, (req, res) => {
+    //console.log(req.query);
+
+    function createRandomString(length) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let result = "";
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+    var fname = req.body['fname'];
+    var lname = req.body['lname'];
+    var email = req.body['email'];
+    var number = req.body['number'];
+    var digit = createRandomString(12);
+
+    var sql1 = `INSERT INTO user_table2 (fname,lname,email,num,digit,pass,salt) VALUES('${fname}', '${lname}', '${email}','${number}','${digit}',NULL,NULL);`;
+    con.con.query(sql1, function (err, result) {
+        if (err) throw err;
+        var userID = result.insertId;
+        res.json({ data1: false, data2: digit, data3: userID });
+    });
+
+})
+router.get("/login", (req, res) => {
+    res.render("login.ejs");
+})
+router.post("/checkLogin", (req, res) => {
+    var email = req.body['email'];
+    var pass = req.body['pass1'];
+    var error = "";
+    var isElegible = true;
+
+    var sql1 = `SELECT salt FROM user_table2 WHERE email='${email}' ;`;
+    con.con.query(sql1, function (err, result) {
+        if (err) throw err;
+        // console.log(result);
+
+        if (result.length == 0) {
+            error = "invalid Credentials!!";
+            isElegible = false;
+            res.json({ data1: isElegible, data2: error });
+        }
+        else {
+            //   console.log(result[0].salt);
+            var pass1 = md5(pass + result[0].salt);
+            // console.log(pass1);
+            var sql2 = `SELECT * FROM user_table2 WHERE email='${email}' AND pass='${pass1}';`;
+            con.con.query(sql2, function (err, result) {
+                if (err) throw err;
+                //console.log(result.length+"length");
+                if (result.length == 0) {
+                    error = "invalid Credentials!!";
+                    isElegible = false;
+                    res.json({ data1: isElegible, data2: error });
+                }
+                else {
+                    const token = jwt.sign({userID:email},"darshan123",{expiresIn:"1h"})
+                    res.cookie("token",token)
+                    .status(200)
+                
+                    res.json({ data1: isElegible, data2: error ,token:token});
+                }
+            });
+        }
+    });
+})
+router.get("/forgetPass", (req, res) => {
+
+    const checkLinkTime = (result) => {
+        var returnVal = true;
+        const date1 = new Date(result);
+        const date2 = new Date();
+        var diff = (date2.getTime() - date1.getTime()) / 1000;
+        if (diff > 120) {
+            returnVal = false;
+        }
+        return returnVal;
+    }
+
+    const checkDigit=(digit)=>{
+
+    }
+    var stage = req.query.stage || 1;
+    if(stage==3){
+        var userId = req.query.userId;
+        var digit = req.query.digit;
+
+        var sql1 = `SELECT * FROM user_table2 WHERE id="${userId}"`;
+        console.log(sql1);
+        con.con.query(sql1, function (err, result){
+            if(err) throw err;
+            console.log(result);
+            if(result[0]==undefined || result==undefined || result[0].length==0){
+                res.render("tokenExpired.ejs");
+            }
+            else{
+                if((checkLinkTime(result[0].created_at)==true) && (digit==result[0].digit)){
+                    console.log("success!!!");
+                    res.render("fPassword.ejs",{data1:userId,data2:digit});
+                }
+                else{
+                    res.render("tokenExpired.ejs");
+                }
+            }
+           
+        })
+
+    }
+    else{
+        res.render("fEmailPassword.ejs");
+    }
+})
+router.post("/forgetPass", (req, res) => {
+    var isUpdate = false;
+    var Time;
+    var id;
+    function createRandomString(length) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let result = "";
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    var stage = req.body.stage || 1;
+    if (stage == 2) {
+        var email = req.body.email;
+        console.log(email);
+        var sql1 = `SELECT * FROM user_table2 WHERE email="${email}"`;
+        con.con.query(sql1, function (err, result) {
+            if (err) throw err;
+            //console.log(result[0]);
+            if (result[0] == undefined) {
+                res.json({ data1: false });
+            }
+            else {
+                id = result[0].id;
+                isUpdate = true;
+                let date = new Date();
+                var formattedDate;
+                var month, min, sec, hour, msec;
+
+                if ((date.getMonth() + 1) < 10) {
+                    month = `0${(date.getMonth() + 1)}`;
+                }
+                else {
+                    month = `${(date.getMonth() + 1)}`;
+                }
+
+                if (date.getMinutes() < 10) {
+                    min = `0${date.getMinutes()}`;
+                }
+                else {
+                    min = `${date.getMinutes()}`;
+                }
+                if (date.getSeconds() < 10) {
+                    sec = `00${date.getSeconds()}`;
+                }
+                else {
+                    sec = `${date.getSeconds()}`;
+                }
+
+                if (date.getHours() < 10) {
+                    hour = `0${date.getHours()}`;
+                }
+                else {
+                    hour = `${date.getHours()}`;
+                }
+                if (date.getMilliseconds() < 10) {
+                    msec = `00${date.getMilliseconds()}`;
+                }
+                else if (date.getMilliseconds < 100) {
+                    msec = `0${date.getMilliseconds()}`;
+                }
+                else {
+                    msec = `${date.getMilliseconds()}`;
+                }
+                formattedDate = `${date.getFullYear()}-${month}-${date.getDate()}`;
+
+                var formatTime = `${hour}:${min}:${sec}`;
+
+                Time = `${formattedDate} ${formatTime}.${msec}`;
+                console.log(Time);
+               // var userID = result.insertId;
+                var digitt = result[0].digit;
+              /*  console.log(digitt+" digit");
+                console.log(id+" userId");*/
+                res.json({ data1: true, digit: digitt, userId: id });
+
+                if (isUpdate == true) {
+                    var sql2 = `UPDATE user_table2 SET created_at = '${Time}' WHERE id = ${id};;`;
+                    con.con.query(sql2, function (err, result) {
+                        if (err) throw err;
+                        console.log("updated!!");
+                    });
+                }
+            }
+
+           
+        });
+    }
+
 })
 
 function stuructureSQL(sql) {
@@ -178,7 +505,7 @@ function lastPageValues(dataLength) {
     }
 }
 
-router.get("/task", (req, res) => {
+router.get("/task",checkToken, (req, res) => {
 
 
     var taskName = req.query.taskName;
@@ -600,7 +927,7 @@ router.get("/task", (req, res) => {
     }
 })
 
-router.post("/taskWithSearch", (req, res) => {
+router.post("/taskWithSearch",checkToken, (req, res) => {
     var page = req.query.page || 1;
     order = "ASC";
 
@@ -635,7 +962,7 @@ router.post("/taskWithSearch", (req, res) => {
         });
     });
 })
-router.post("/DeliSearch", (req, res) => {
+router.post("/DeliSearch",checkToken, (req, res) => {
     var page = req.query.page || 1;
     var offset = (page - 1) * 15;
 
@@ -669,12 +996,12 @@ router.post("/DeliSearch", (req, res) => {
         }
     });
 })
-router.get("/jobApplicationForm1",(req,res)=>{
+router.get("/jobApplicationForm1",checkToken,(req,res)=>{
     var thirdValue = false;
     var secondValid = false;
     res.render("/home/darshan-parekh/Desktop/FirstProject/FirstProject_27MAR/views/job_application_form/form.ejs", { secondValid, thirdValue });
 })
-router.post("/jobApplicationForm1",(req,res)=>{
+router.post("/jobApplicationForm1",checkToken,(req,res)=>{
     var thirdValue = false ;
     var thirdFinalValue = req.body["varification"];
     var secondValid = true;
@@ -1313,7 +1640,7 @@ router.post("/jobApplicationForm1",(req,res)=>{
         res.render("/home/darshan-parekh/Desktop/FirstProject/FirstProject_27MAR/views/job_application_form/form.ejs", { data1: error, data2: myform, secondValid, thirdValue })
     }
 })
-router.get("/jobApplicationForm1Update",(req,res)=>{
+router.get("/jobApplicationForm1Update",checkToken,(req,res)=>{
     var thirdValue = true;
     var secondValid = false;
     var empId = req.query.empId;
@@ -1373,7 +1700,7 @@ router.get("/jobApplicationForm1Update",(req,res)=>{
     });
 })
 
-router.get("/jobApplicationForm2",(req,res)=>{
+router.get("/jobApplicationForm2",checkToken,(req,res)=>{
     var secondValid = false;
     var sql2 = `SELECT * FROM all_states;`;
     con.con.query(sql2, function (err, result) {
@@ -1383,7 +1710,7 @@ router.get("/jobApplicationForm2",(req,res)=>{
     });
    
 })
-router.post("/update", (req, res) => {
+router.post("/update",checkToken, (req, res) => {
     var secondValid = true;
 
     var fname = req.body["fname"];
@@ -1637,7 +1964,7 @@ router.post("/update", (req, res) => {
             
         });  
 });
-router.get("/action",(req,res)=>{
+router.get("/action",checkToken,(req,res)=>{
     var stateId = req.query.id;
    // console.log("Hello");
     var sql =`SELECT * FROM all_cities WHERE state_code=${stateId}`;
@@ -1646,7 +1973,7 @@ router.get("/action",(req,res)=>{
         res.json({data:result});
     });
 })
-router.get("/success",(req,res)=>{
+router.get("/success",checkToken,(req,res)=>{
     res.send("<h1>Thank you for your presence :-) !!</h1>");
 })
 module.exports = { router };

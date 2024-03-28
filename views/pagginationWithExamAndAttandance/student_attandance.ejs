@@ -47,7 +47,7 @@
     function addFilter(value,id){
        // console.log("Hello!");
         var futureFilter=value;     
-        window.location=`http://localhost:8080/student_attandance?student=${id}&month=${futureFilter}`;
+        window.location=`http://localhost:8081/task/?taskName=PaginationWithExamAndAttandanceGrid&secondTaskName=taskAtt&student=${id}&month=${futureFilter}`;
     }
     document.getElementById("<%=month%>").selected=true;
 </script>

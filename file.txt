@@ -1,1 +1,0 @@
-SELECT * FROM student_master WHERE first_name IN ('Hannis') AND last_name IN ('Japeth') AND gender LIKE '%' AND email LIKE '%' AND city LIKE '%' AND DOB LIKE '%'
