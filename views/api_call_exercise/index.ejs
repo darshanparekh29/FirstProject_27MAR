@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/api_call_exercise/style.css">
+</head>
+
+<body>
+    <div class="Container">
+        <table id="table">
+           
+        </table>
+        <div class="footerMain">
+            <div class="PageStart foot btn" id="PageStart" onclick="onfirst()">
+                << </div>
+                    <div class="PageLeft foot btn" id="PageLeft" onclick="changePage(-1)"> </div>
+                    <div class="PageNumber foot pageCount" id="pageCount">
+    
+                    </div>
+                    <div class="PageRight foot btn" id="PageRight" onclick="changePage(1)">
+    
+                    </div>
+                    <div class="PageEnd foot btn" id="PageEnd" onclick="onlast()"> >> </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script>
+
+    let data = [];
+    var page = 1;
+    var view_per_page = 10;
+    var page_first_ele = 1;
+    var page_last_ele = 10;
+    var first_time = false;
+
+    document.getElementById("pageCount").innerHTML = page;
+    document.getElementById("PageRight").innerHTML = page + 1;
+    document.getElementById("PageLeft").innerHTML = page - 1;
+
+    var minPages = 1;
+    var maxPages = 10;
+    currentPage=page;
+    
+    function goHome() {
+        window.location = `http://localhost:8081/task/?taskName=apiExercise&subTask=callPost`;
+    }
+
+    function edit(){
+        console.log(page);
+        if(page==minPages){
+            document.getElementById("PageStart").style.display = "none";
+            document.getElementById("PageLeft").style.display = "none";
+            document.getElementById("PageRight").style.display = "block";
+            document.getElementById("PageEnd").style.display = "block";
+        }
+        else if(page==maxPages){
+            document.getElementById("PageStart").style.display = "block";
+            document.getElementById("PageLeft").style.display = "block";
+            document.getElementById("PageRight").style.display = "none";
+            document.getElementById("PageEnd").style.display = "none";
+        }
+        else{
+            document.getElementById("PageStart").style.display = "block";
+            document.getElementById("PageLeft").style.display = "block";
+            document.getElementById("PageRight").style.display = "block";
+            document.getElementById("PageEnd").style.display = "block";
+        }
+    }
+    
+    function changePage(val) {
+        currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+        currentPage = currentPage + val;
+
+        if (currentPage > maxPages || currentPage < 1) {
+            return 0;
+        }
+
+        page = currentPage;
+        document.getElementById("pageCount").innerHTML = page;
+        document.getElementById("PageRight").innerHTML = page + 1;
+        document.getElementById("PageLeft").innerHTML = page - 1;
+       
+        fetchapi2(page);
+        edit();
+        
+    }
+
+    function onfirst() {
+        page = minPages;
+
+        document.getElementById("pageCount").innerHTML = page;
+        document.getElementById("PageRight").innerHTML = page + 1;
+        document.getElementById("PageLeft").innerHTML = page - 1;
+      
+        fetchapi2(page);
+        edit();
+        
+       
+    }
+    function onlast() {
+        currentPage = Number(document.getElementById("pageCount").innerHTML);
+        if (currentPage >= maxPages) {
+            return 0;
+        }
+        page = maxPages;
+        document.getElementById("pageCount").innerHTML = page;
+        document.getElementById("PageRight").innerHTML = page + 1;
+        document.getElementById("PageLeft").innerHTML = page - 1;
+        fetchapi2(page);
+        edit();
+        
+       
+    }
+    const fetchapi = async (page) => {
+        var min_page = (page - 1) * 10;
+        var max_page = page * 10;
+        let url = `https://jsonplaceholder.typicode.com/posts`;
+        let api = await fetch(url);
+        let api_data = await api.json();
+        api_data2 = api_data.slice(min_page, max_page);
+        return api_data2;
+    }
+
+
+    async function fetchapi2(page) {
+        var a = await fetchapi(page);
+
+        document.getElementById("table").innerHTML = "";
+        document.getElementById("table").innerHTML = a.map(e =>
+            `<tr>
+                <td>${e.userId}</td>
+                <td>${e.id}</td>
+                <td>${e.title}</td>
+                <td>${e.body}</td>
+                <td><a href="/task/?taskName=apiExercise&subTask=comments&id=${e.id}">View</a></td>      
+            </tr>`
+        ).join("");
+        
+    }
+    if(page==1){
+        fetchapi2(page);
+        edit();
+    }
+
+    function viewPost(id){
+        fetchIndapi(id);
+        console.log(id+"Hello!");
+    }
+
+
+
+
+
+</script>
+
+</html>

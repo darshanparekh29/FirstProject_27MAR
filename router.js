@@ -588,6 +588,16 @@ router.get("/task", (req, res) => {
         res.render("/home/darshan-parekh/Desktop/FirstProject/FirstProject_27MAR/views/pagginationWithExamAndAttandance/student_attandance.ejs",{data:result,month});
     })
     }
+    else if(taskName=="apiExercise"){
+        var subTask = req.query.subTask;
+        if(subTask=="callPost"){
+            res.render("/home/darshan-parekh/Desktop/FirstProject/FirstProject_27MAR/views/api_call_exercise/index.ejs");
+        }
+        else if(subTask=="comments"){
+            var id=req.query.id;
+            res.render("/home/darshan-parekh/Desktop/FirstProject/FirstProject_27MAR/views/api_call_exercise/dataList.ejs",{id});
+        }
+    }
 })
 
 router.post("/taskWithSearch", (req, res) => {

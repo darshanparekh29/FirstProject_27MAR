@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/api_call_exercise/style.css">
+</head>
+
+<body>
+    <div class="Container">
+       
+        <table id="table">
+    
+        </table>
+        <table id="table2">
+    
+        </table>
+    </div>
+    <script>
+        const fetchapi = async () => {
+            var id =document.getElementById("random");
+            let url = `https://jsonplaceholder.typicode.com/posts`;
+            let api = await fetch(url);
+            let api_data = await api.json();
+            
+            api_data2 = api_data[`<%=id%>`-1];
+            return api_data2;
+        }
+
+        const fetchIndapi1 = async () => {
+            var data = await fetchapi();
+            console.log(data);
+
+            document.getElementById("table").innerHTML = "";
+            document.getElementById("table").innerHTML = 
+                
+            `<tr><td>userId:${data.userId}</td></tr>
+            <tr><td>id:${data.id}</td></tr>
+            <tr><td>title:${data.title}</td></tr>
+            <tr><td>body:${data.body}</td></tr>
+            <tr><td><div class="btn1" onclick=showComments(${data.id})>comments</div></td></tr>
+            `
+        }
+
+        fetchIndapi1();
+
+        const fetchapi2 = async (id) => {
+           // var id =document.getElementById("random");
+            let url = `https://jsonplaceholder.typicode.com/comments?postId=${id}`;
+            let api = await fetch(url);
+            let api_data = await api.json();
+            
+            return api_data;
+        }
+
+        const fetchIndapi2 = async (id) => {
+            var data = await fetchapi2(id);
+            console.log(data);
+
+             document.getElementById("table2").innerHTML = "";
+            document.getElementById("table2").innerHTML = data.map(e =>
+            `<tr>
+                <td>${e.name}</td>
+                <td>${e.email}</td>
+                <td>${e.body}</td>
+            </tr>`
+        ).join("");
+        }
+
+        function showComments(id){
+            fetchIndapi2(id);
+        }
+
+        /*
+        const fetchIndapi2 = async (id) => {
+            let url = `https://jsonplaceholder.typicode.com/comments?postId=${id}`;
+            let api = await fetch(url);
+            let api_data = await api.json();
+
+            document.getElementById("table").innerHTML = "";
+            document.getElementById("table").innerHTML = a.map(e =>
+                `
+                <tr><td>${e.id}</td></tr>    
+                <tr><td>${e.title}</td></tr>
+                <tr><td>${e.status}</td></tr>
+                <tr><td>${e.publishedAt}</td></tr>
+                <tr><td>${e.updatedAt}</td></tr>
+                <tr><td><div class="btn5" onclick=viewPost(${e.id})>View</div></td></tr>      
+            </tr>`
+            ).join("");
+        }*/
+
+    </script>
+</body>
+
+</html>
