@@ -1,0 +1,87 @@
+table,
+        tr,
+        th,
+        td {
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+        th,td{
+            padding:5px 15px;
+            text-align: center;
+        }
+        table{
+            width:90%;
+        }
+        .Container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        th, #headTr>td {
+            background-color: #04AA6D;
+            color: white;
+            height: 40px;
+        }
+        table tr:nth-child(even){background-color: #f2f2f2;}
+
+        table tr:hover {background-color: #ddd;}
+        .Container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .footerMain{
+            display: flex;
+           justify-content: center;
+           align-items: center;
+           margin:20px 0px;
+        }
+        .foot{
+            margin:5px 10px;
+        }
+        .btn{
+            font-size: 30px;
+            background-color: aqua;
+            border-radius: 5px;
+            padding:3px 7px;
+            cursor: pointer;
+        }
+        .btn:hover{
+            background-color:aquamarine;
+        }
+        .btn1{
+            cursor: pointer;
+            background-color: #9BCF53;
+            padding:5px 10px;
+            border-radius: 2px;;
+            color:white;
+        }
+        .btn1:hover{
+            color:black;
+            background-color: #BFEA7C;
+        }
+        .btn2{
+            cursor: pointer;
+            background-color: #1F2544;
+            padding:5px 10px;
+            border-radius: 2px;;
+            color:white;
+        }
+        .btn2:hover{
+            color:black;
+            background-color: #474F7A;
+        }
+        .Container{
+            background-color: #F7DED0;
+        }
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        h3{
+            padding:15px 0px 15px 0px;
+        }
+        h2{
+            padding:0px 0px 25px 0px;
+        }

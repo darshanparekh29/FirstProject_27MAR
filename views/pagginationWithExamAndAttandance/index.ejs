@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/pagginationWithExamAndAttandance/style.css">
+</head>
+<style>
+</style>
+<body>
+    <div class="Container">
+        <h3>24DEV058-DARSHAN PAREKH</h3><br>
+        <h2>Student Master</h2>
+        <table>
+            <th rowspan="2">ID</th>
+            <th rowspan="2">Name</th>
+            <th colspan="2">Prelims</th>
+            <th colspan="2">Terminal</th>
+            <th colspan="2">Final</th>
+            <th rowspan="2">Total Marks</th>
+            <th rowspan="2">Report Card</th>
+            <th rowspan="2">Attandance Reports</th>
+        
+        <tr id="headTr">
+            <td>Practical</td>
+            <td>Theroy</td>
+            <td>Practical</td>
+            <td>Theroy</td>
+            <td>Practical</td>
+            <td>Theroy</td>
+        </tr>
+        
+        <% data.map((e)=>{ %>
+            <tr>
+            <td><%=e.student_id%></td>
+            <td><%=e.first_name%></td>
+            <td><%=e.prelim_theroy_marks%></td>
+            <td><%=e.prelim_practical_marks%></td>
+            <td><%=e.Terminal_Theory_marks%></td>
+            <td><%=e.Terminal_Practical_marks%></td>
+            <td><%=e.Final_Theroy_marks%></td>
+            <td><%=e.Final_Theroy_marks%></td>
+            <td><%=e.Total_Marks%></td>
+            <td>
+                <div class="reportCard btn1" onclick="reportCard(`<%=e.student_id%>`)">Show</div>
+            </td>
+            <td>
+                <div class="attCard btn2" onclick="attCard(`<%=e.student_id%>`)">Show</div>
+            </td>
+        </tr>
+        <% });  %>
+        
+    </table>
+    <div class="footerMain">
+        <div class="PageStart foot btn" onclick="onfirst()"> << </div>
+        <div class="PageLeft foot btn" onclick="changePage(-1)"> < </div>
+        <div class="PageNumber foot pageCount" id="pageCount"><%=page %></div>
+        <div class="PageRight foot btn" onclick="changePage(1)"> > </div>
+        <div class="PageEnd foot btn" onclick="onlast()"> >> </div>
+    </div>
+    </div>
+    
+<script>
+    let currentPage =1;
+    let minPage=1;
+    let MaxPage=20;
+
+    function changePage(val){
+        
+        currentPage =Number(document.getElementById("pageCount").innerHTML);
+
+        currentPage = currentPage + val;
+        if(currentPage>20||currentPage<1){
+            return 0;
+        }
+        window.location=`http://localhost:8081/task/?taskName=PaginationWithExamAndAttandanceGrid&secondTaskName=taskHome&page=${currentPage}`;
+        
+    }
+
+    function onfirst(){
+        currentPage =Number(document.getElementById("pageCount").innerHTML);
+      
+      if(currentPage<=1){
+          return 0;
+      }
+        window.location=`http://localhost:8081/task/?taskName=PaginationWithExamAndAttandanceGrid&secondTaskName=taskHome&page=${minPage}`;
+    }
+    function onlast(){
+        currentPage =Number(document.getElementById("pageCount").innerHTML);
+      if(currentPage>=20){
+          return 0;
+      }
+        window.location=`http://localhost:8081/task/?taskName=PaginationWithExamAndAttandanceGrid&secondTaskName=taskHome&page=${MaxPage}`;
+    }
+    function reportCard(value){
+        window.location=`http://localhost:8081/task/?taskName=PaginationWithExamAndAttandanceGrid&secondTaskName=taskReport&student=${value}`;
+    }
+    function attCard(value){
+        window.location=`http://localhost:8081/task/?taskName=PaginationWithExamAndAttandanceGrid&secondTaskName=taskAtt&student=${value}`;
+    }
+</script>
+</body>
+</html>

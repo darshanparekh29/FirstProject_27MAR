@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/pagginationWithExamAndAttandance/style.css">
+</head>
+<body>
+   <div class="Container">
+    <h3>24DEV058-DARSHAN PAREKH</h3><br>
+    <h2>Attandance Master</h2>
+    <table>
+        <thead>
+            <th>student ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Present(Days)</th>
+            <th>Present(Percentage)</th>
+            <th>Month</th>
+        </thead>
+        <%data.forEach(function(e){ %>
+        <tr>
+            <td><%=e.student_id%></td>
+            <td><%=e.first_name%></td>
+            <td><%=e.last_name%></td>
+            <td><%=e.present_days%></td>
+            <td><%=e.PERCENTAGE%>%</td>
+            <td>
+                <div calss="main">
+                    <div class="filter">
+                        <select name="month" id="month">
+                            <option value="DEC 2023" id="DEC 2023" onclick="addFilter(value,`<%=e.student_id%>`)">DEC 2023</option>
+                            <option value="JAN 2024" id="JAN 2024" onclick="addFilter(value,`<%=e.student_id%>`)">JAN 2024</option>
+                            <option value="FEB 2024" id="FEB 2024" onclick="addFilter(value,`<%=e.student_id%>`)">FEB 2024</option>
+                        </select>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <% });  %>
+    </table>
+   </div>
+    
+<script>
+
+    function addFilter(value,id){
+       // console.log("Hello!");
+        var futureFilter=value;     
+        window.location=`http://localhost:8080/student_attandance?student=${id}&month=${futureFilter}`;
+    }
+    document.getElementById("<%=month%>").selected=true;
+</script>
+</body>
+</html>

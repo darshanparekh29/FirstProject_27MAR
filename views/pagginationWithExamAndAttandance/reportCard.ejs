@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/pagginationWithExamAndAttandance/style.css">
+</head>
+<body>
+    <div class="Container">
+        <h3>24DEV058-DARSHAN PAREKH</h3><br>
+        <h2>Exam Master</h2>
+        <table>
+            <th rowspan="2">Subject</th>
+            <th colspan="2">Prelims</th>
+            <th colspan="2">Terminal</th>
+            <th colspan="2">Final</th>
+            <th rowspan="2">Total marks</th>
+        <tr>
+            <td>Practical</td>
+            <td>Theroy</td>
+            <td>Practical</td>
+            <td>Theroy</td>
+            <td>Practical</td>
+            <td>Theroy</td>
+        </tr>
+        <% var a=0; %>
+            <% data.map((e)=>{ %>
+                <tr>
+                   
+                    <td><%=e.subject%></td>
+                    <td><%=e.prelim_theroy_marks%></td>
+                    <td><%=e.prelim_practical_marks%></td>
+                    <td><%=e.Terminal_Theory_marks%></td>
+                    <td><%=e.Terminal_Practical_marks%></td>
+                    <td><%=e.Final_Theroy_marks%></td>
+                    <td><%=e.Final_Practical_marks%></td>
+                    <td><%=e.Total_Marks%></td>
+                    <%  a=a+e.Total_Marks %>
+                </tr>
+            <% }); %>              
+        </table>
+        <h3>Total Marks :<%=a%>/1200</h3>
+    </div>
+    
+</body>
+</html>
