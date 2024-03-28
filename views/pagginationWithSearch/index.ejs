@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pagination</title>
+  <link rel="stylesheet" href="/pagginationWithSearch/style.css">
+</head>
+
+<body>
+    <div class="Container">
+        <h3>24DEV058-Darshan Parekh</h3>
+        <div class="InnerContainer">
+            <input type="text" name="enterQuery" id="query" placeholder="Enter a Query" tabindex="2">
+            <div class="btn" onclick="fireQuery()">GO</div>
+        </div>
+    </div>
+   <script>
+    function fireQuery(){
+            var a = document.getElementById("query");
+            window.location=`http://localhost:8081/task?taskName=PaginationWithSearch&query=${a.value}&secondP=1`;
+          //  console.log(a.value);
+        }
+   </script>
+</body>
+
+</html>

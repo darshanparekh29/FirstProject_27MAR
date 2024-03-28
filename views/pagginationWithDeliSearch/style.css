@@ -1,0 +1,162 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+.conTable2{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+
+}
+.btn {
+    background-color: #561C24;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 15px;
+    text-align: center;
+    display: inline-block;
+}
+.InnerContainer{
+    display: flex;;
+    text-align: center;
+    justify-content: center;
+}
+
+.btn:hover {
+    background-color: #6D2932;
+}
+table,
+        tr,
+        th
+         {
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        td{
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        th,td{
+            padding:3px 10px;
+            text-align: center;
+        }
+        table{
+            width:85%;
+        }
+        .Container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        th, #headTr>td {
+            background-color: #04AA6D;
+            color: white;
+            height: 40px;
+        }
+        table tr:nth-child(even){background-color: #f2f2f2;}
+
+        table tr:hover {background-color: #ddd;}
+        .Container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .footerMain{
+            display: flex;
+           justify-content: center;
+           align-items: center;
+           margin:20px 0px;
+        }
+        .foot{
+            margin:5px 10px;
+        }
+        .btn{
+            font-size: 20px;
+            background-color: #A5DD9B;
+            border-radius: 100%;
+            padding:8px 8px;
+            cursor: pointer;
+        }
+        .pageCount{
+            font-size: 30px;
+            background-color: #C5EBAA;
+            border-radius: 100%;
+            padding:15px 15px;
+            cursor: pointer;
+        }
+        .btn:hover{
+            transform: scale(1.2);
+            background-color:#C5EBAA;
+        }
+        .btn1{
+            cursor: pointer;
+            background-color: #9BCF53;
+            padding:5px 10px;
+            border-radius: 2px;;
+            color:white;
+        }
+        .btn1:hover{
+            color:black;
+            background-color: #BFEA7C;
+        }
+        .btn2,.home{
+            cursor: pointer;
+            background-color: #1F2544;
+            padding:5px 10px;
+            border-radius: 2px;;
+            color:white;
+            margin-bottom:10px;
+        }
+        .btn2:hover{
+            color:black;
+            background-color: #474F7A;
+        }
+        .home:hover{
+            color:black;
+            background-color: #474F7A;
+        }
+
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        h3{
+            padding:15px 0px 15px 0px;
+        }
+        h2{
+            padding:0px 0px 25px 0px;
+        }
+.data1{
+    margin:7px 6px 0px 0px;;
+    font-size: 12px;;
+}
+.rowHead{
+    
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.arrowUp:hover{
+    transform: scale(1.20);
+}
+.arrowDown:hover{
+    transform: scale(1.20);
+}
+.arrowUp{
+    margin-bottom:-3px;
+    size:5px;
+}
+.arrowDown{
+    margin-top:-3px;;
+}
+#arrow{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}

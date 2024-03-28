@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DetailList</title>
+    <link rel="stylesheet" href="/pagginationWithSearch/style.css">
+</head>
+
+
+<body>
+    <div class="Container">
+        <h3>24DEV058-Darshan Parekh</h3>
+        <div class="InnerContainer">
+            <input type="text" name="enterQuery" id="query" placeholder="Enter a Query" tabindex="2">
+            <div class="btn" onclick="fireQuery()">GO</div>
+        </div>
+        <form action="/taskWithSearch" method="POST">
+            <input type="text" name="enterData" id="data" placeholder="Enter a ID" tabindex="1">
+            <input type="submit">
+        </form>
+        
+
+        <p id="order" style="display:none;">
+            <%=order%>
+        </p>
+        <p id="column" style="display:none;">
+            <%=orderBy%>
+        </p>
+
+        <%var head=data2[0].table.split("_");%>
+            <h2>
+                <% head.map((e)=>{ %>
+                    <%=e+" "%>
+            <% }) %>
+        </h2>
+        <div onclick="showfilter()" class="btn1">Show More</div>
+        <div id="filterContainer" style="display: none;">
+            <input type="text" name="stu_id" id="data1" placeholder="student id" tabindex="3">
+            <input type="text" name="subject" id="data2" placeholder="subject" tabindex="3">
+            <input type="text" name="exam_type" id="data3" placeholder="exam type" tabindex="3">
+            <input type="text" name="practical_marks" id="data4" placeholder="practical marks" tabindex="3">
+            <select name="operation" id="operation">
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+              </select>
+            <div class="btn" onclick="startFilter()">Go</div>
+        </div>
+        <div class=" home" id="home" onclick="goHome()">Home
+    </div>
+    <table>
+        <%data2.map((e)=>{ %>
+            <% var a=1; %>
+                <th>
+                    <div class="rowHead" id="rowHead">
+                        <div class="data1">
+                            <%=e.name%>
+                        </div>
+
+
+                        <div id="arrow">
+                            <div class="arrowUp" onclick="OrderAec(`<%=e.name%>`)"><img
+                                    src="/pagginationWithSearch/arrow-up-short.svg" alt=""></div>
+                            <div class="arrowDown" onclick="OrderDesc(`<%=e.name%>`)"><img
+                                    src="/pagginationWithSearch/arrow-down-short.svg" alt=""></div>
+                        </div>
+                    </div>
+                </th>
+                <% a++; %>
+                    <% }) %>
+                        <% data1.map((e)=>{%>
+                            <tr>
+                                <% data2.map((fields)=>{ %>
+                                    <td>
+                                        <%=e[fields.name]%>
+                                    </td>
+                                    <% }) %>
+                            </tr>
+                            <%});%>
+
+    </table>
+    <div class="footerMain">
+        <div class="PageStart foot btn" id="PageStart" onclick="onfirst()">
+            << </div>
+                <div class="PageLeft foot btn" id="PageLeft" onclick="changePage(-1)"> <%=parseInt(page)-1%> </div>
+                <div class="PageNumber foot pageCount" id="pageCount">
+                    <%=page %>
+                </div>
+                <div class="PageRight foot btn" id="PageRight" onclick="changePage(1)">
+                    <%=parseInt(page)+1%>
+                </div>
+                <div class="PageEnd foot btn" id="PageEnd" onclick="onlast()"> >> </div>
+        </div>
+    </div>
+    <script>
+        function startFilter(){
+            var data1 = document.getElementById("data1").value || '%';
+            var data2 = document.getElementById("data2").value || '%';
+            var data3 = document.getElementById("data3").value || '%';
+            var data4 = document.getElementById("data4").value || '%';
+            var data5 = document.getElementById("operation").value  || `AND`;
+
+            window.location = `http://localhost:8081/task?taskName=startFilter&data1=${data1}&data2=${data2}&data3=${data3}&data4=${data4}&data5=${data5}&query=${`<%=sql1%>`}`;
+        }
+        function showfilter(){
+            if(document.getElementById("filterContainer").style.display=="block"){
+                document.getElementById("filterContainer").style.display="none";
+            }
+            else{
+                document.getElementById("filterContainer").style.display="block"
+            }
+            
+        }
+        function fireQuery() {
+            var a = document.getElementById("query");
+            window.location=`http://localhost:8081/task?taskName=PaginationWithSearch&query=${a.value}&secondP=1`;
+            //  console.log(a.value);
+        }
+
+        var minPages = 1;
+        var maxPages = `<%=requirePages%>`;
+        currentPage = 1;
+
+        function goHome() {
+            window.location = `http://localhost:8081/task?taskName=PaginationWithSearch`;
+        }
+
+        currentPage = Number(document.getElementById("pageCount").innerHTML);
+        if (currentPage == 1) {
+            document.getElementById("PageStart").style.display = "none";
+            document.getElementById("PageLeft").style.display = "none";
+        }
+        else if (currentPage == maxPages) {
+            document.getElementById("PageRight").style.display = "none";
+            document.getElementById("PageEnd").style.display = "none";
+        }
+
+        function changePage(val) {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+            currentPage = currentPage + val;
+
+            if (currentPage > maxPages || currentPage < 1) {
+                return 0;
+            }
+            // window.location = `http://localhost:8080?page=${currentPage}&query=${`<%=sql1%>`}&parms=1&secondP=1`;
+            window.location = `http://localhost:8081/task?taskName=PaginationWithSearch&page=${currentPage}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${orderBy}&order=${order}`;
+
+        }
+
+        function onfirst() {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+            if (currentPage <= 1) {
+                return 0;
+            }
+            // window.location = `http://localhost:8080?page=${minPages}&query=${`<%=sql1%>`}&parms=1&secondP=1`;
+            window.location = `http://localhost:8081/task?taskName=PaginationWithSearch&page=${minPages}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${orderBy}&order=${order}`;
+        }
+        function onlast() {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            if (currentPage >= maxPages) {
+                return 0;
+            }
+            window.location = `http://localhost:8081/task?taskName=PaginationWithSearch&page=${maxPages}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${orderBy}&order=${order}`;
+
+            /*
+            window.location = `http://localhost:8080/?page=${maxPages}&query=${`<%=sql1%>`}&parms=1&secondP=1`;*/
+        }
+       
+        function OrderAec(value) {
+
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+            let column = value;
+            let o;
+            if (order == "DESC") {
+                o = "ASC";
+            }
+            if (order == "ASC") {
+                o = "DECS";
+            }
+            else{
+                o="ASC";
+            }
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            window.location = `http://localhost:8081/task?taskName=PaginationWithSearch&page=${minPages}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${column}&order=${o}`;
+        }
+        function OrderDesc(value) {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+            let column = value;
+
+            let o;
+
+            if (order == "ASC") {
+                o = "DESC";
+            }
+            if (order == "DESC") {
+                o = "ASC";
+            }
+            else{
+                o="DESC";
+            }
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            window.location = `http://localhost:8081/task?taskName=PaginationWithSearch&page=${minPages}&query=${`<%=sql1%>`}&parms=1&secondP=1&orderBy=${column}&order=${o}`;
+        }
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/pagginationWithSearch/style.css">
+</head>
+
+<body>
+    <div class="Container">
+        <div class="Back" id="home" onclick="goBack()"><img src="arrow-left-circle-fill.svg" alt=""></div>
+        <div class=" home" id="home" onclick="goHome()">Home</div>
+        <p id="order" style="display:none;">
+            <%=order%>
+        </p>
+        <p id="column" style="display:none;">
+            <%=orderBy%>
+        </p>
+        <table>
+            <% if(checkResult==false) { %>
+                <%data2.map((e)=>{ %>
+                    <th>
+                        <div class="rowHead" id="rowHead">
+                            <div class="data1">
+                                <%=e.name%>
+                            </div>
+
+                            <div id="arrow">
+                                <div class="arrowUp" onclick="OrderAec(`<%=e.name%>`)"><img src="arrow-up-short.svg"
+                                        alt=""></div>
+                                <div class="arrowDown" onclick="OrderDesc(`<%=e.name%>`)"><img
+                                        src="arrow-down-short.svg" alt=""></div>
+                            </div>
+                        </div>
+                    </th>
+                    <% }) %>
+                        <% data1.map((e)=>{%>
+                            <tr>
+                                <% data2.map((fields)=>{ %>
+                                    <td>
+                                        <%=e[fields.name]%>
+                                    </td>
+                                    <% }) %>
+                            </tr>
+                            <%});%>
+                                <% }else { %>
+                                    <h2>Data Not Found</h2>
+                                    <% } %>
+
+        </table>
+        <% if(checkResult==false){ %>
+            <div class="footerMain">
+                <div class="PageStart foot btn" id="PageStart" onclick="onfirst()">
+                    << </div>
+                        <div class="PageLeft foot btn" id="PageLeft" onclick="changePage(-1)"> <%=parseInt(page)-1%>
+                        </div>
+                        <div class="PageNumber foot pageCount" id="pageCount">
+                            <%=page %>
+                        </div>
+                        <div class="PageRight foot btn" id="PageRight" onclick="changePage(1)">
+                            <%=parseInt(page)+1%>
+                        </div>
+                        <div class="PageEnd foot btn" id="PageEnd" onclick="onlast()"> >> </div>
+                </div>
+            </div>
+            <% }else{ %>
+
+                <%}%>
+
+    </div>
+    <script>
+        var minPages = 1;
+        var maxPages = `<%=requirePages%>`;
+        currentPage = 1;
+
+        function goHome() {
+            window.location = `http://localhost:8080`;
+        }
+        function goBack() {
+            window.location = `http://localhost:8080/?page=${currentPage}&query=${`<%=query%>`}&parms=1&secondP=1`;
+        }
+
+        currentPage = Number(document.getElementById("pageCount").innerHTML);
+        if (currentPage == 1) {
+            document.getElementById("PageStart").style.display = "none";
+            document.getElementById("PageLeft").style.display = "none";
+        }
+        else if (currentPage == maxPages) {
+            document.getElementById("PageRight").style.display = "none";
+            document.getElementById("PageEnd").style.display = "none";
+        }
+
+        function changePage(val) {
+            let o = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+            currentPage = currentPage + val;
+
+            if (currentPage > maxPages || currentPage < 1) {
+                return 0;
+            }
+            window.location = `http://localhost:8080/startFilter?page=${currentPage}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
+
+        }
+
+        function onfirst() {
+            let o = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+            if (currentPage <= 1) {
+                return 0;
+            }
+
+            window.location = `http://localhost:8080/startFilter?page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
+        }
+        function onlast() {
+            let o = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            if (currentPage >= maxPages) {
+                return 0;
+            }
+            window.location = `http://localhost:8080/startFilter?page=${maxPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
+        }
+        function OrderAec(value) {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+            let column = value;
+            let o;
+            if (order == "DESC") {
+                o = "ASC";
+            }
+            if (order == "ASC") {
+                o = "DECS";
+            }
+            else {
+                o = "ASC";
+            }
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            window.location = `http://localhost:8080/startFilter?page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${column}&order=${o}`;
+        }
+        function OrderDesc(value) {
+            let order = document.getElementById('order').innerHTML;
+            let orderBy = document.getElementById('column').innerHTML;
+            let column = value;
+            let o;
+            if (order == "ASC") {
+                o = "DESC";
+            }
+            if (order == "DESC") {
+                o = "ASC";
+            }
+            else {
+                o = "DESC";
+            }
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            window.location = `http://localhost:8080/startFilter?page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${column}&order=${o}`;
+        }
+    </script>
+</body>
+
+</html>

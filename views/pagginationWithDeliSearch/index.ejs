@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/pagginationWithDeliSearch/style.css">
+</head>
+
+<body>
+    <div class="Container">
+        <%-include("header.ejs")%>
+        <div class="conTable2">
+            <table>
+                <%data2.map((e)=>{ %>
+                    <th>
+                        <div class="rowHead" id="rowHead">
+                            <div class="data1">
+                                <%=e.name%>
+                            </div>
+                        </div>
+                    </th>
+                    <% }) %>
+                        <% data1.map((e)=>{%>
+                            <tr>
+                                <% data2.map((fields)=>{ %>
+                                    <td>
+                                        <%=e[fields.name]%>
+                                    </td>
+                        <% }) %>
+                            </tr>
+                <%});%>
+            </table>
+        </div>
+        <div class="footerMain">
+            <div class="PageStart foot btn" id="PageStart" onclick="onfirst()">
+                << </div>
+                    <div class="PageLeft foot btn" id="PageLeft" onclick="changePage(-1)"> <%=parseInt(page)-1%> </div>
+                    <div class="PageNumber foot pageCount" id="pageCount">
+                        <%=page %>
+                    </div>
+                    <div class="PageRight foot btn" id="PageRight" onclick="changePage(1)">
+                        <%=parseInt(page)+1%>
+                    </div>
+                    <div class="PageEnd foot btn" id="PageEnd" onclick="onlast()"> >> </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var minPages = 1;
+        var maxPages = `<%=requirePages%>`;
+        currentPage = 1;
+
+        function goHome() {
+            window.location = `http://localhost:8080`;
+        }
+
+        currentPage = Number(document.getElementById("pageCount").innerHTML);
+        if (currentPage == 1) {
+            document.getElementById("PageStart").style.display = "none";
+            document.getElementById("PageLeft").style.display = "none";
+        }
+        else if (currentPage == maxPages) {
+            document.getElementById("PageRight").style.display = "none";
+            document.getElementById("PageEnd").style.display = "none";
+        }
+
+        function changePage(val) {
+           
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+            currentPage = currentPage + val;
+
+            if (currentPage > maxPages || currentPage < 1) {
+                return 0;
+            }
+           
+            window.location = `http://localhost:8080/?page=${currentPage}`;
+
+        }
+
+        function onfirst() {
+           
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+
+            if (currentPage <= 1) {
+                return 0;
+            }
+           
+            window.location = `http://localhost:8080/?page=${minPages}`;
+        }
+        function onlast() {
+           
+            currentPage = Number(document.getElementById("pageCount").innerHTML);
+            if (currentPage >= maxPages) {
+                return 0;
+            }
+            window.location = `http://localhost:8080/?page=${maxPages}`;
+        }
+    </script>
+</body>
+
+</html>
