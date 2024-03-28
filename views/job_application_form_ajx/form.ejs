@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOB APPLICATION FORM</title>
+    <link rel="stylesheet" href="/job_application_form_ajx/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .btn5 {
+            display: inline-block;
+            border-radius: 5px;
+            padding: 7px 15px;
+            background-color: black;
+            border: 2px solid black;
+            color: white;
+        }
+
+        #nextPage {
+            width: 40px;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Container">
+        <div class="con">
+            <h2>JOB APPLICATION FORM</h2>
+        </div>
+        <form action="/" name="myform" onsubmit="return validateForm()" method="POST" id="form">
+            <div id="form1">
+                <table cellpadding="6">
+                    <tr>
+                        <td colspan="2">
+                            <fieldset>
+                                <legend>Basic Detail</legend>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="formdesign" id="fname">
+                                                <label class="label" for="fname">First name:</label>
+                                                <input type="text" name="fname" <% if(secondValid==true){%>
+                                                value="<%=data2.fname%>"
+                                                    <%}%>
+                                                        ><br><span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.fname_error%>
+                                                                        <%}%>
+                                                            </b></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="formdesign" id="lname">
+                                                <label class="label" for="lname">Last name:</label>
+                                                <input type="text" name="lname" <% if(secondValid==true){%>
+                                                value="<%=data2.lname%>"
+                                                    <%}%>
+                                                        ><br><span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.lname_error%>
+                                                                        <%}%>
+                                                            </b></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="formdesign" id="des">
+                                                <label class="label" for="des">Designation:</label>
+                                                <input type="text" name="des" <% if(secondValid==true){%>
+                                                value="<%=data2.des%>"
+                                                    <%}%>
+                                                        ><br><span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.des_error%>
+                                                                        <%}%>
+                                                            </b></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="formdesign" id="add1">
+                                                <label class="label" for="add1">Address1:</label>
+                                                <input type="textarea" name="add1" <% if(secondValid==true){%>
+                                                value="<%=data2.add1%>"
+                                                    <%}%>
+                                                        ><br><span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.add1_error%>
+                                                                        <%}%>
+                                                            </b></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="formdesign" id="email">
+                                                <label class="label" for="email">Email:</label>
+                                                <input type="text" name="email" <% if(secondValid==true){%>
+                                                value="<%=data2.email%>"
+                                                    <%}%>
+                                                        ><br><span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.email_error%>
+                                                                        <%}%>
+                                                            </b></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="formdesign" id="add2">
+                                                <label class="label" for="add2">Address2:</label>
+                                                <input type="text" name="add2" <% if(secondValid==true){%>
+                                                value="<%=data2.add2%>"
+                                                    <%}%>
+                                                        ><br><span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.add2_error%>
+                                                                        <%}%>
+                                                            </b></span><br>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="formdesign" id="number">
+                                                <label class="label" for="number">Phone Number:</label>
+                                                <input type="text" name="number" <% if(secondValid==true){%>
+                                                value="<%=data2.number%>"
+                                                    <%}%>
+                                                        ><br><span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.number_error%>
+                                                                        <%}%>
+                                                            </b></span><br>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="formdesign" id="gender">
+                                                <label class="label" for="gender">Gender:</label>
+                                                <input type="radio" name="gender_combo" value="male">
+                                                <label for="male">Male</label>
+                                                <input type="radio" name="gender_combo" value="female">
+                                                <label for="Female">Female</label>
+                                                <input type="radio" name="gender_combo" value="Others">
+                                                <label for="gender_combo">Others</label>
+                                                <br><span class="formerror"><b></b></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="formdesign" id="state">
+                                                <span class="formerror"><b></b></span><br>
+                                                <label class="label" for="state">State:</label>
+
+                                                <select name="state" onchange="stateWiseCity(this.value)">
+                                                    <option value="0" selected="selected">select state</option>
+                                                    <%data3.map((e)=>{ %>
+                                                        <option value="<%=e.state_code%>">
+                                                            <%=e.state_name%>
+                                                        </option>
+                                                        <%})%>
+                                                </select>
+
+
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="formdesign" id="txtHint">
+                                                <label class="label" for="city">city:</label>
+                                                <select name="city" id="city">
+                                                    <option value="0">Select City:</option>
+                                                </select>
+
+                                                <span class="formerror"><b>
+                                                        <% if(secondValid==true){%>
+                                                            <%=data1.city_error%>
+                                                                <%}%>
+                                                    </b></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="formdesign" id="rel">
+                                                <label class="label" for="rel">Raltionship Status:</label>
+
+                                                <select name="rel">
+                                                    <option value="0" selected="selected">select</option>
+                                                    <option value="single">single</option>
+                                                    <option value="married">mariied</option>
+                                                    <option value="divorced">divorced</option>
+                                                </select><br>
+                                                <span class="formerror"><b></b></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="formdesign" id="zcode">
+
+                                                <label class="label" for="zcode">Zip code</label>
+                                                <input type="text" id="zcode" name="zcode" <% if(secondValid==true){%>
+                                                value="<%=data2.zcode%>"
+                                                    <%}%>
+                                                        ><span class="formerror"><b>
+                                                            </b></span><br>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="formdesign" id="dob">
+
+                                                <label class="label" for="dob">Date Of Birth</label>
+                                                <input type="text" name="dob" placeholder="YYYY-MM-DD" <%
+                                                    if(secondValid==true){%>
+                                                value="<%=data2.dob%>"
+                                                    <%}%>
+                                                        > <span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.dob_error%>
+                                                                        <%}%>
+                                                            </b></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="form2">
+                <fieldset>
+                    <legend>Education Detail</legend>
+                    <div class="btn8" onclick="addEducation()">Add Education</div>
+                    <table class="education">
+                        <tr>
+                            <td><span class="formerror"><b></b></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="formdesign degree1">
+                                    <label for="board">Course Name:</label>
+                                    <input type="text" name="degree[]"><br><span class="formerror"><b>
+
+                                        </b></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="formdesign pyear1">
+                                    <label for="pyear">Passing Year:</label>
+                                    <input type="text" name="pyear[]"><br><span class="formerror"><b>
+
+                                        </b></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="formdesign per1">
+                                    <label for="per">Percentage:</label>
+                                    <input type="text" name="perc[]"><br><span class="formerror"><b>
+
+                                        </b></span>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="addEducation">
+
+                    </div>
+                </fieldset>
+            </div>
+            <div id="form3">
+                <fieldset>
+                    <legend>Work Experience</legend>
+                    <div class="btn8" onclick="addExperence()">Add Experience</div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="formdesign cname1">
+                                    <label for="cname1">Company name:</label>
+                                    <input type="text" name="cname[]"><br><span class="formerror"><b>
+                                        </b></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="formdesign des1">
+                                    <label for="des1">Designation:</label>
+                                    <input type="text" name="dess[]"><br><span class="formerror"><b>
+
+                                        </b></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="formdesign fdate1">
+                                    <label for="fdate1">From:</label>
+                                    <input type="text" name="fdate[]"><br><span class="formerror"><b>
+
+                                        </b></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="formdesign tdate1">
+                                    <label for="tdate1">To:</label>
+                                    <input type="text" name="tdate[]"><br><span class="formerror"><b>
+                                        </b></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="work_Experience">
+
+                    </div>
+                </fieldset>
+            </div>
+            <div id="form4">
+                <fieldset>
+                    <div id="language">
+                        <span class="formerror"><b>
+                                <% if(secondValid==true){%>
+                                    <%=data1.language_error%>
+                                        <%}%>
+                            </b></span>
+                    </div>
+                    <legend>Language Known</legend>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="language[]" value="hindi" id="hindi">
+                                <label for="hindi">Hindi</label>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="read[]" value="hindi" id="hread">
+                                <label for="hread">Read</label>
+            </div>
+            </td>
+            <td>
+                <input type="checkbox" name="write[]" value="hindi" id="hwrite">
+                <label for="hwrite">Write</label>
+    </div>
+    </td>
+    <td>
+        <div class="Lan">
+            <input type="checkbox" name="speak[]" value="hindi" id="hspeak">
+            <label for="hspeak">Speak</label><span class="formerror"><b>
+
+                </b></span>
+        </div>
+    </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="language[]" value="english" id="english">
+            <label for="english">English</label><span class="formerror"><b></b></span>
+        </td>
+        <td>
+            <input type="checkbox" name="read[]" value="english" id="eread">
+            <label for="eread">Read</label>
+            </div>
+        </td>
+        <td>
+            <input type="checkbox" name="write[]" value="english" id="ewrite">
+            <label for="ewrite">Write</label>
+            </div>
+        </td>
+        <td>
+            <div class="Lan">
+                <input type="checkbox" name="speak[]" value="english" id="espeak">
+                <label for="espeak">Speak</label><span class="formerror"><b>
+                    </b></span>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="language[]" value="gujarati" id="gujarati">
+            <label for="gujarati">Gujarati</label>
+        </td>
+        <td>
+            <input type="checkbox" name="read[]" value="gujarati" id="gread">
+            <label for="gread">Read</label>
+            </div>
+        </td>
+        <td>
+            <input type="checkbox" name="write[]" value="gujarati" id="gwrite">
+            <label for="gwrite">Write</label>
+            </div>
+        </td>
+        <td>
+            <div class="Lan">
+                <input type="checkbox" name="speak[]" value="gujarati">
+                <label for="gspeak">Speak</label><span class="formerror"><b> </b></span>
+            </div>
+        </td>
+    </tr>
+    </table>
+    </fieldset>
+    </div>
+    <div id="form5">
+        <fieldset>
+            <div id="technology">
+                <span class="formerror"><b>
+
+                    </b></span>
+            </div>
+            <legend>Technologies you know</legend>
+            <table>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="technology[]" value="php" id="php">
+                        <label for="php">PHP</label>
+                    </td>
+                    <td>
+                        <div class="formdesign" id="pbeg">
+                            <input type="radio" name="l_php" value="1">
+                            <label for="pbeg">Beginner</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign" id="pmed">
+                            <input type="radio" name="l_php" value="2">
+                            <label for="pmed">Mideator</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign lanErr">
+                            <input type="radio" name="l_php" value="3">
+                            <label for="pexp">Expert</label><span class="formerror"><b>
+
+                                </b></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="technology[]" value="mysql" id="mysql">
+                        <label for="mysql">Mysql</label>
+                    </td>
+                    <td>
+                        <div class="formdesign" id="mbeg">
+                            <input type="radio" name="l_mysql" value="1">
+                            <label for="mbeg">Beginner</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign" id="mmed">
+                            <input type="radio" name="l_mysql" value="2">
+                            <label for="mmed">Mideator</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign lanErr" id="mexp">
+                            <input type="radio" name="l_mysql" value="3">
+                            <label for="mexp">Expert</label><span class="formerror"><b>
+
+                                </b></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="formdesign">
+                            <input type="checkbox" name="technology[]" value="laravel" id="laravel">
+                            <label for="laravel">laravel</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign" id="lbeg">
+                            <input type="radio" name="l_laravel" value="1">
+                            <label for="lbeg">Beginner</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign" id="lmed">
+                            <input type="radio" name="l_laravel" value="2">
+                            <label for="lmed">Mideator</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign lanErr" id="lexp">
+                            <input type="radio" name="l_laravel" value="3">
+                            <label for="lexp">Expert</label><span class="formerror"><b>
+
+                                </b></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="formdesign">
+                            <input type="checkbox" name="technology[]" value="oracle" id="oracle">
+                            <label for="oracle">Oracle</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign" id="obeg">
+                            <input type="radio" name="l_oracle" value="1">
+                            <label for="obeg">Beginner</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign" id="omed">
+                            <input type="radio" name="l_oracle" value="2">
+                            <label for="omed">Mideator</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formdesign lanErr" id="oexp">
+                            <input type="radio" name="l_oracle" value="3">
+                            <label for="oexp">Expert</label><span class="formerror"><b>
+
+                                </b></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    <div id="form6">
+        <fieldset>
+            <legend>Referance Contact</legend>
+            <div class="btn8" onclick="addReference()">Add Referance</div>
+            <table>
+                <tr>
+                    <td>
+                        <div id="nref1" class="refName">
+                            <label for="nref1">Name:</label>
+                            <input type="text" name="nref[]">
+                            <br><span class="formerror"><b>
+
+                                </b></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="rnum1" class="refNum">
+                            <label for="rnum1">Number:</label>
+                            <input type="text" name="rnum[]">
+                            <br><span class="formerror"><b>
+
+                                </b></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="refrel1" class="refrel">
+                            <label for="refrel1">Relation:</label>
+                            <input type="text" name="refrel[]">
+                            <br><span class="formerror"><b>
+
+                                </b></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div id="references">
+
+            </div>
+        </fieldset>
+    </div>
+    <div id="form7">
+        <fieldset>
+            <legend>Preferances</legend>
+            <table>
+                <tr>
+                    <td>
+                        <div class="formdesign" id="plocaton">
+                            <span class="formerror"><b>
+                                    <% if(secondValid==true){%>
+                                        <%=data1.location_error%>
+                                            <%}%>
+                                </b></span><br>
+                            <label for="pre_location">Preferd Location:</label>
+                            <ol>
+                                <li>
+                                    <select name="plocaton1" id="plocation1">
+                                        <option value="1">Ahemdabad</option>
+                                        <option value="2">Surat</option>
+                                        <option value="3">Rajkot</option>
+
+                                    </select>
+                                </li>
+                                <li>
+                                    <select name="plocaton2" id="plocation2">
+                                        <option value="1">Ahemdabad</option>
+                                        <option value="2">Surat</option>
+                                        <option value="3">Rajkot</option>
+
+                                    </select>
+                                </li>
+                                <li>
+                                    <select name="plocaton3" id="plocation3">
+                                        <option value="1">Ahemdabad</option>
+                                        <option value="2">Surat</option>
+                                        <option value="3">Rajkot</option>
+
+                                    </select>
+                                </li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div id="nperiod">
+                                        <label for="nperiod">Notice Period:</label>
+                                        <input type="text" name="nperiod"><span class="formerror"><b>
+                                                <% if(secondValid==true){%>
+                                                    <%=data1.nperiod_error%>
+                                                        <%}%>
+                                            </b></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="c_ctc">
+                                        <label for="c_ctc">Current CTC:</label>
+                                        <input type="text" name="c_ctc"><span class="formerror"><b>
+                                                <% if(secondValid==true){%>
+                                                    <%=data1.c_ctc_error%>
+                                                        <%}%>
+                                            </b></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="formdesign"  id="e_ctc">
+                                        <label for="e_ctc">Expacted CTC:</label>
+                                        <input type="text" name="e_ctc"><span class="formerror"><b>
+                                                <% if(secondValid==true){%>
+                                                    <%=data1.e_ctc_error%>
+                                                        <%}%>
+                                            </b></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div id="dapartment">
+                            <label for="dapartment">Department:</label>
+
+                            <select name="department">
+                                <option value="design">Design</option>
+                                <option value="marketing">Marketing</option>
+
+                            </select>
+                            <br><span class="formerror"><b>
+                                    <% if(secondValid==true){%>
+                                        <%=data1.department_error%>
+                                            <%}%>
+                                </b></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    <div id="pageId" style="display: none;">1</div>
+    <div id="changePage">
+        <div id="prevPage" class="btn5" onclick="prevPage()">Prev</div>
+        <div id="nextPage" class="btn5" onclick="nextPage()">Next</div>
+    </div>
+
+    </form>
+    </div>
+    <script src="/job_application_form_ajx/form.js"></script>
+    <script>
+        const FindValue = (id) => {
+            var a = document.getElementById(id);
+            var b = a.getElementsByTagName("input");
+            return b[0].value;
+        }
+        const setError = (id, error) => {
+            let a = document.getElementById(id);
+            let b = a.getElementsByClassName("formerror");
+            console.log("formerror" + b);
+            b[0].innerHTML = "*" + error;
+        }
+
+        const setError2 = (degree1, error, index) => {
+            let a = document.getElementsByClassName(degree1);
+            let b = a[index].getElementsByClassName("formerror");
+            b[0].innerHTML = "*" + error;
+        }
+        const formValidation = (pageNumber) => {
+            var returnVal = true;
+            if (pageNumber == 1) {
+
+                var stringRegex = /^[a-zA-Z]+$/;
+                var fname = FindValue("fname");
+                if (fname == "") {
+                    setError("fname", "please fill First Name!!");
+                    returnVal = false;
+                }
+                else if (stringRegex.test(fname) == false) {
+                    setError("fname", "Name should not be contain Numbers!!");
+                    returnVal = false;
+                }
+
+                var lname = FindValue("lname");
+                if (lname == "") {
+                    setError("lname", "please fill Last Name!!");
+                    returnVal = false;
+                }
+                else if (stringRegex.test(lname) == false) {
+                    setError("lanme", "Name should not be contain Numbers!!");
+                    returnVal = false;
+                }
+
+                var dess = FindValue("des");
+                if (dess == "") {
+                    setError("des", "please fill Designation!!");
+                    returnVal = false;
+                }
+                else if (stringRegex.test(dess) == false) {
+                    setError("des", "Designation should not be contain Numbers!!");
+                    returnVal = false;
+                }
+
+                var add1 = FindValue("add1");
+                if (add1 == "") {
+                    setError("add1", "please fill Address1!!");
+                    returnVal = false;
+                }
+
+                var add2 = FindValue("add2");
+                if (add2 == "") {
+                    setError("add2", "please fill Address2!!");
+                    returnVal = false;
+                }
+
+                var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                var email = FindValue("email");
+                if (email == "") {
+                    setError("email", "please fill Email!!");
+                    returnVal = false;
+                }
+                else if (emailRegex.test(email) == false) {
+                    setError("email", "please enter valid Email!!");
+                    returnVal = false;
+                }
+
+                var phoneRegex = /^[0-9]{10}/;
+                var number = FindValue("number");
+                if (number == "") {
+                    setError("number", "please fill number!!");
+                    returnVal = false;
+                }
+                else if (phoneRegex.test(number) == false) {
+                    setError("number", "please enter valid Phone Number!!");
+                    returnVal = false;
+                }
+
+                if (document.getElementsByName("gender_combo")[0].checked == false && document.getElementsByName("gender_combo")[1].checked == false) {
+                    setError("gender", "please select Gender!!");
+                    returnVal = false;
+                }
+
+                if (document.getElementsByName("state")[0].value == 0) {
+                    setError("state", "please select state!");
+                    returnVal = false;
+                }
+
+                if (document.getElementsByName("city")[0].value == 0) {
+                    setError("state", "please select state!");
+                    returnVal = false;
+                }
+
+                var relStatus = document.getElementsByName("rel");
+                if (relStatus[0].value == 0) {
+                    setError("rel", "please select Relationship Status!");
+                    returnVal = false;
+                }
+
+                var zipRegex = /[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}/;
+                var zipcode = FindValue("zcode");
+                if (zipcode == "") {
+                    setError("zcode", "please fill zcode!!");
+                    returnVal = false;
+                }
+                else if (zipRegex.test(zipcode) == false) {
+                    setError("zcode", "please enter valid zcode!!");
+                    returnVal = false;
+                }
+
+                var DOBRegex = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/;
+                var DOB = FindValue("dob");
+                if (DOB == "") {
+                    setError("dob", "please fill DOB!!");
+                    returnVal = false;
+                }
+                else if (DOBRegex.test(DOB) == false) {
+                    setError("dob", "please enter valid DOB!!");
+                    returnVal = false;
+                }
+            }
+            if (pageNumber == 2) {
+                var degree = document.getElementsByName("degree[]");
+                var pyear = document.getElementsByName("pyear[]");
+                var perc = document.getElementsByName("perc[]");
+
+                let i = 0;
+                let pYearRegex = /[0-9]{4}/;
+                degree.forEach((e) => {
+                    if (pyear[i].value == "" || pyear[i].value == undefined) {
+                        setError2("pyear1", "please set passing year!", i);
+                        returnVal = false;
+                    }
+
+                    if (pyear[i].value.length != 4) {
+                        setError2("pyear1", "please enter valid passting years!", i);
+                        returnVal = false;
+                    }
+                    else if (pYearRegex.test(pyear[i].value) == false) {
+                        setError2("pyear1", "please enter valid passing years!", i);
+                        returnVal = false;
+                    }
+
+                    if (degree[i].value == "" || degree[i].value == undefined) {
+                        setError2("degree1", "please se course name!!", i);
+                        returnVal = false;
+                    }
+
+                    if (perc[i].value == "" || perc[i].value == undefined) {
+                        setError2("per1", "please set percentage or CGPA!!!", i);
+                        returnVal = false;
+                    }
+
+                    i++;
+                })
+            }
+            if (pageNumber == 3) {
+                var cname = document.getElementsByName("cname[]");
+                var dess = document.getElementsByName("dess[]");
+                var fdate = document.getElementsByName("fdate[]");
+                var tdate = document.getElementsByName("tdate[]");
+                let i = 0;
+
+                var dateRegex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+                cname.forEach((e) => {
+                    if (e.value == "" || e.value == undefined) {
+                        setError2("cname1", "please add name!!", i);
+                        returnVal = false;
+                    }
+
+                    if (dess[i].value == "" || dess[i].value == undefined) {
+                        setError2("des1", "please add designation " + i + "!!", i);
+                        returnVal = false;
+                    }
+
+                    if (fdate[i].value == "" || fdate[i].value == undefined) {
+                        setError2("fdate1", "please add from date!!", i);
+                        returnVal = false;
+                    }
+                    else if (dateRegex.test(fdate[i].value) == false) {
+                        setError2("fdate1", "please add valid date using YYYY-MM-DD format!", i);
+                        returnVal = false;
+                    }
+
+                    if (tdate[i].value == "" || tdate[i].value == undefined) {
+                        setError2("tdate1", "please add from date!!", i);
+                        returnVal = false;
+                    }
+                    else if (dateRegex.test(tdate[i].value) == false) {
+                        setError2("tdate1", "please add valid date using YYYY-MM-DD format!", i);
+                        returnVal = false;
+                    }
+                    i++;
+                })
+            }
+            if (pageNumber == 4) {
+                var language = document.getElementsByName("language[]");
+                var read = document.getElementsByName("read[]");
+                var write = document.getElementsByName("write[]");
+                var speak = document.getElementsByName("speak[]");
+
+                var isLang = false;
+                let i = 0;
+                language.forEach((e) => {
+                    if (e.checked) {
+                        isLang = true;
+                    }
+                   // console.log("read[i].checked"+read[i].checked);
+                    if (read[i].checked || write[i].checked || speak[i].checked) {
+                      //  console.log("e.checked "+e.checked);
+                        if (e.checked == false) {
+                            setError2("Lan", "Please select Language first!!", i);
+                            returnVal = false;
+                        }
+                    }
+                    i++;
+                })
+                if (isLang == false) {
+                    setError("language", "please select language!!");
+                    returnVal = false;
+                }
+            }
+            if (pageNumber == 5) {
+                var phptech = document.getElementsByName("l_php");
+                var mysql = document.getElementsByName("l_mysql");
+                var laravel = document.getElementsByName("l_laravel");
+                var oracle = document.getElementsByName("l_oracle");
+
+                var technology = document.getElementsByName("technology[]");
+                var isTech = false;
+                technology.forEach((e) => {
+                    if (e.checked) {
+                        isTech = true;
+                    }
+                    if (e.value == "php" && e.checked) {
+                        var isphpSelected = false;
+                        phptech.forEach((t) => {
+                            if (t.checked) {
+                                isphpSelected = true;
+                            }
+                        })
+                        if (isphpSelected == false) {
+                            setError2("lanErr", "please select php level first!", 0);
+                            returnVal = false;
+                        }
+                    }
+                    else if (e.value == "php" && e.checked == false) {
+                        var isphpSelected = false;
+                        phptech.forEach((t) => {
+                            if (t.checked) {
+                                isphpSelected = true;
+                            }
+                        })
+                        if (isphpSelected) {
+                            setError2("lanErr", "please select php first!", 0);
+                            returnVal = false;
+                        }
+                    }
+                    if (e.value == "mysql" && e.checked) {
+                        var issqlSelected = false;
+                        mysql.forEach((t2) => {
+                            if (t2.checked) {
+                                issqlSelected = true;
+                            }
+                        })
+                        if (issqlSelected == false) {
+                            setError2("lanErr", "please select mysql level first!", 1);
+                            returnVal = false;
+                        }
+                    }
+                    else if (e.value == "mysql" && e.checked == false) {
+                        var issqlSelected = false;
+                        mysql.forEach((t2) => {
+                            if (t2.checked) {
+
+                                issqlSelected = true;
+
+                            }
+                        })
+                        if (issqlSelected) {
+                            setError2("lanErr", "please select mysql first!", 1);
+                            returnVal = false;
+                        }
+                    }
+
+
+                    if (e.value == "laravel" && e.checked) {
+                        var islaravelSelected = false;
+                        laravel.forEach((t2) => {
+                            if (t2.checked) {
+                                islaravelSelected = true;
+                            }
+                        })
+                        if (islaravelSelected == false) {
+                            setError2("lanErr", "please select laravel level first!", 2);
+                            returnVal = false;
+                        }
+                    }
+                    else if (e.value == "laravel" && e.checked == false) {
+                        var islaravelSelected = false;
+                        laravel.forEach((t2) => {
+                            if (t2.checked) {
+                                islaravelSelected = true;
+                            }
+                        })
+                        if (islaravelSelected) {
+                            setError2("lanErr", "please select laravel first!", 2);
+                            returnVal = false;
+                        }
+                    }
+
+
+                    if (e.value == "oracle" && e.checked) {
+                        var isoracleSelected = false;
+                        oracle.forEach((t2) => {
+                            if (t2.checked) {
+                                isoracleSelected = true;
+                            }
+                        })
+                        if (isoracleSelected == false) {
+                            setError2("lanErr", "please select oracle level first!", 3);
+                            returnVal = false;
+                        }
+                    }
+                    else if (e.value == "oracle" && e.checked == false) {
+                        var isoracleSelected = false;
+                        oracle.forEach((t2) => {
+                            if (t2.checked) {
+                                if (e.value == "oracle" && e.checked == false) {
+                                    isoracleSelected = true;
+                                }
+                            }
+                        })
+                        if (isoracleSelected) {
+                            setError2("lanErr", "please select oracle first!", 3);
+                            returnVal = false;
+                        }
+                    }
+
+
+                    console.log(e + "technology" + e.value);
+                })
+                if (isTech == false) {
+                    setError("technology", "please select Technology!!");
+                    returnVal = false;
+                }
+            }
+            if (pageNumber == 6) {
+                var refName = document.getElementsByName("nref[]");
+                var refNum = document.getElementsByName("rnum[]");
+                var refrel = document.getElementsByName("refrel[]");
+
+                let i = 0;
+                refName.forEach((e) => {
+                    if (e.value == "") {
+                        setError2("refName", "please add reference name!!", i);
+                        returnVal = false;
+                    }
+                    if (refNum[i].value == "") {
+                        setError2("refNum", "please add reference name!!", i);
+                        returnVal = false;
+                    }
+                    if (refrel[i].value == "") {
+                        setError2("refrel", "please add reference name!!", i);
+                        returnVal = false;
+                    }
+                    i++;
+                })
+            }
+            if (pageNumber == 7) {
+                let x1 = document.getElementsByName("plocaton1")[0].value;
+                let x2 = document.getElementsByName("plocaton2")[0].value;
+                let x3 = document.getElementsByName("plocaton3")[0].value;
+                if (x1 == x2 || x1 == x3 || x2 == x3) {
+                    seterror("plocaton", "Preference location must be diffrent!");
+                    returnVal = false;
+                }
+
+                var nperiod = document.getElementsByName("nperiod")[0];
+                console.log(nperiod.value);
+                if(nperiod.value=="" || nperiod.value==undefined){
+                    seterror("nperiod","please add notice period!!");
+                    returnVal = false;
+                }
+
+                var c_ctc = document.getElementsByName("c_ctc")[0];
+                console.log(c_ctc.value);
+                if(c_ctc.value=="" || c_ctc.value==undefined){
+                    seterror("c_ctc","please add current ctc period!!");
+                    returnVal = false;
+                }
+
+                var e_ctc = document.getElementsByName("e_ctc")[0];
+                console.log(e_ctc.value);
+                if(e_ctc.value=="" || e_ctc.value==undefined){
+                    seterror("e_ctc","please add expacted ctc period!!");
+                    returnVal = false;
+                }
+
+            }
+            console.log(returnVal);
+            return returnVal;
+        }
+        const nextPageActivity = (pageNumber) => {
+            var formId = document.getElementById(`form${pageNumber}`);
+            formId.style.display = "none";
+            document.getElementById("pageId").innerHTML = parseInt(pageNumber) + 1;
+            var pageNumber2 = document.getElementById("pageId").innerHTML;
+            var formId2 = document.getElementById(`form${pageNumber2}`);
+            formId2.style.display = "block";
+        }
+        const prevPage = () => {
+            var pageNumber = document.getElementById("pageId").innerHTML;
+            if (pageNumber != 1) {
+                var formId = document.getElementById(`form${pageNumber}`);
+                formId.style.display = "none";
+                document.getElementById("pageId").innerHTML = parseInt(pageNumber) - 1;
+                var pageNumber2 = document.getElementById("pageId").innerHTML;
+                var formId2 = document.getElementById(`form${pageNumber2}`);
+                formId2.style.display = "block";
+            }
+        }
+        const nextPage = async () => {
+            clearerrors();
+            var pageNumber = document.getElementById("pageId").innerHTML;
+            if (formValidation(pageNumber)) {
+                if (pageNumber == 7) {
+                    console.log(pageNumber);
+                    let form = document.getElementById("form");
+                    let formdata = new FormData(form);
+
+                    const params = new URLSearchParams(formdata);
+
+                    const response1 = await new Response(params).text();
+
+                    
+                    var data1 = await fetch(`http://localhost:8081/update`, {
+                        method: "post",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: response1,
+                        
+                    });
+                 
+                    console.log("Sucess....");
+                 //   window.location=`http://localhost:8081/success`;
+                   
+                }
+                else if (pageNumber != 7) {
+                    nextPageActivity(pageNumber);
+                }
+            }
+        }
+        function clearerrors() {
+            element = document.getElementsByClassName("formerror");
+            for (let item of element) {
+                item.innerHTML = "";
+            }
+        }
+    </script>
+</body>
+
+</html>

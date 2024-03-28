@@ -1,0 +1,39 @@
+table{
+    width:95%;
+}
+div{
+    margin:10px;
+}
+hr{
+    width:90%;
+}
+fieldset{
+    margin:20px;
+}
+.Container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.con{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.formerror{
+    font-size: 10px;;
+    color:red;
+    font-weight: bold;
+}
+#form2,#form3,#form4,#form5,#form6,#form7{
+    display: none;;
+}
+#work_Experience{
+    width:100%;
+    height:100%;
+}
+.btn8{
+    display: inline-block;
+    border: 1px solid black;
+    padding:7px 15px;
+}
