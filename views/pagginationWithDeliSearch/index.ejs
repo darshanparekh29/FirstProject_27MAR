@@ -53,7 +53,7 @@
         currentPage = 1;
 
         function goHome() {
-            window.location = `http://localhost:8080`;
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithDeliSearch`;
         }
 
         currentPage = Number(document.getElementById("pageCount").innerHTML);
@@ -76,7 +76,7 @@
                 return 0;
             }
            
-            window.location = `http://localhost:8080/?page=${currentPage}`;
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithDeliSearch&page=${currentPage}`;
 
         }
 
@@ -88,7 +88,7 @@
                 return 0;
             }
            
-            window.location = `http://localhost:8080/?page=${minPages}`;
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithDeliSearch&page=${minPages}`;
         }
         function onlast() {
            
@@ -96,7 +96,7 @@
             if (currentPage >= maxPages) {
                 return 0;
             }
-            window.location = `http://localhost:8080/?page=${maxPages}`;
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithDeliSearch&page=${maxPages}`;
         }
     </script>
 </body>
