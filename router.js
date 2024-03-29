@@ -182,7 +182,7 @@ router.post("/checkLogin", (req, res) => {
             con.con.query(sql2, function (err, result) {
                 if (err) throw err;
                 //console.log(result.length+"length");
-                if (result.length == 0) {
+                if (result.length == 0) {                                                                                                                                    
                     error = "invalid Credentials!!";
                     isElegible = false;
                     res.json({ data1: isElegible, data2: error });
@@ -1975,5 +1975,17 @@ router.get("/action",checkToken,(req,res)=>{
 })
 router.get("/success",checkToken,(req,res)=>{
     res.send("<h1>Thank you for your presence :-) !!</h1>");
+})
+router.get("/webPage",checkToken,(req,res)=>{
+    var webPage = req.query.page;
+    if(webPage=="WebPage1"){
+        res.render("/home/darshan-parekh/Desktop/FirstProject/FirstProject_27MAR/views/Ass1/index.ejs");
+    }
+    else if(webPage=="WebPage2"){
+        res.render("/home/darshan-parekh/Desktop/FirstProject/FirstProject_27MAR/views/Ass2/index.ejs");
+    }
+    else if(webPage=="WebPage3"){
+        res.render("/home/darshan-parekh/Desktop/FirstProject/FirstProject_27MAR/views/Ass3/index.ejs");
+    }
 })
 module.exports = { router };
