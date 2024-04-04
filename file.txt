@@ -1,1 +1,1 @@
-select student_id,first_name,last_name,father_name,mother_name,gender,email,city,p_number,em_number from student_master
+SELECT * FROM student_master WHERE first_name IN ('hannis') AND last_name LIKE '%' AND gender LIKE '%' AND email LIKE '%' AND city LIKE '%' AND DOB LIKE '%'

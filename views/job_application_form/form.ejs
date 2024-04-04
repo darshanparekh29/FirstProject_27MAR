@@ -745,6 +745,7 @@
                 </tr>
                 <tr>
                     <td>
+
                         <fieldset>
                             <div id="language">
                                 <span class="formerror"><b>
@@ -753,7 +754,6 @@
                                                 <%}%>
                                     </b></span>
                             </div>
-
                             <legend>Language Known</legend>
                             <table>
                                 <tr>
@@ -788,7 +788,7 @@
             </div>
     </td>
     <td>
-        <div id="hindiLan">
+        <div class="Lan" id="hindiLan">
             <input type="checkbox" name="speak[]" value="hindi" id="hspeak" <%if(thirdValue){ data3.map((e)=>{
             if(e.language_id==1){
             if(e.launguage_speak==1){%>
@@ -831,7 +831,7 @@
                 </div>
         </td>
         <td>
-            <div id="englishLan">
+            <div class="Lan" id="englishLan">
                 <input type="checkbox" name="speak[]" value="english" id="espeak" <%if(thirdValue){ data3.map((e)=>{
                 if(e.language_id==2){
                 if(e.launguage_speak==1){%>
@@ -873,7 +873,7 @@
                 </div>
         </td>
         <td>
-            <div id="gujaratiLan">
+            <div class="Lan" id="gujaratiLan">
                 <input type="checkbox" name="speak[]" value="gujarati" <%if(thirdValue){ data3.map((e)=>{
                 if(e.language_id==3){
                 if(e.launguage_speak==1){%>
@@ -900,7 +900,8 @@
             <table>
                 <tr>
                     <td>
-                        <input type="checkbox" name="technology" value="php" id="php" <%if(thirdValue){ data4.map((e)=>{
+                        <input type="checkbox" name="technology[]" value="php" id="php" <%if(thirdValue){
+                            data4.map((e)=>{
                         if(e.technology_id==1){ %>
                         checked="checked"
                         <% } }) %>
@@ -933,7 +934,7 @@
                         </div>
                     </td>
                     <td>
-                        <div class="formdesign" id="pexp">
+                        <div class="formdesign lanErr" id="pexp">
                             <input type="radio" name="l_php" value="3" <%if(thirdValue){ data4.map((e)=>{
                             if(e.technology_id==1){
                             if(e.technology_level==3){%>
@@ -951,7 +952,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" name="technology" value="mysql" id="mysql" <%if(thirdValue){
+                        <input type="checkbox" name="technology[]" value="mysql" id="mysql" <%if(thirdValue){
                             data4.map((e)=>{
                         if(e.technology_id==2){ %>
                         checked="checked"
@@ -985,7 +986,7 @@
                         </div>
                     </td>
                     <td>
-                        <div class="formdesign" id="mexp">
+                        <div class="formdesign lanErr" id="mexp">
                             <input type="radio" name="l_mysql" value="3" <%if(thirdValue){ data4.map((e)=>{
                             if(e.technology_id==2){
                             if(e.technology_level==3){%>
@@ -1004,7 +1005,7 @@
                 <tr>
                     <td>
                         <div class="formdesign">
-                            <input type="checkbox" name="technology" value="laravel" id="laravel" <%if(thirdValue){
+                            <input type="checkbox" name="technology[]" value="laravel" id="laravel" <%if(thirdValue){
                                 data4.map((e)=>{
                             if(e.technology_id==3){ %>
                             checked="checked"
@@ -1039,7 +1040,7 @@
                         </div>
                     </td>
                     <td>
-                        <div class="formdesign" id="lexp">
+                        <div class="formdesign lanErr" id="lexp">
                             <input type="radio" name="l_laravel" value="3" <%if(thirdValue){ data4.map((e)=>{
                             if(e.technology_id==3){
                             if(e.technology_level==3){%>
@@ -1058,7 +1059,7 @@
                 <tr>
                     <td>
                         <div class="formdesign">
-                            <input type="checkbox" name="technology" value="oracle" id="oracle" <%if(thirdValue){
+                            <input type="checkbox" name="technology[]" value="oracle" id="oracle" <%if(thirdValue){
                                 data4.map((e)=>{
                             if(e.technology_id==4){ %>
                             checked="checked"
@@ -1093,7 +1094,7 @@
                         </div>
                     </td>
                     <td>
-                        <div class="formdesign" id="oexp">
+                        <div class="formdesign lanErr" id="oexp">
                             <input type="radio" name="l_oracle" value="3" <%if(thirdValue){ data4.map((e)=>{
                             if(e.technology_id==4){
                             if(e.technology_level==3){%>
@@ -1120,7 +1121,7 @@
                 <table>
                     <tr>
                         <td>
-                            <div id="nref1">
+                            <div id="nref1" class="refName">
                                 <label for="nref1">Name:</label>
                                 <input type="text" name="nref[]" <%if(thirdValue){ if(data5[0]!=undefined){%>
                                 value="<%=data5[0].ref_name%>"
@@ -1132,7 +1133,7 @@
                             </div>
                         </td>
                         <td>
-                            <div id="rnum1">
+                            <div id="rnum1" class="refNum">
                                 <label for="rnum1">Number:</label>
                                 <input type="text" name="rnum[]" <%if(thirdValue){ if(data5[0]!=undefined){%>
                                 value="<%=data5[0].ref_contact_number%>"
@@ -1144,7 +1145,7 @@
                             </div>
                         </td>
                         <td>
-                            <div id="refrel1">
+                            <div id="refrel1" class="refrel">
                                 <label for="refrel1">Relation:</label>
                                 <input type="text" name="refrel[]" <%if(thirdValue){ if(data5[0]!=undefined){%>
                                 value="<%=data5[0].ref_relation%>"
@@ -1158,7 +1159,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <div id="nref2">
+                            <div id="nref2" class="refName">
                                 <label for="nref2">Name:</label>
                                 <input type="text" name="nref[]" <%if(thirdValue){ if(data5[1]!=undefined){%>
                                 value="<%=data5[1].ref_name%>"
@@ -1170,7 +1171,7 @@
                             </div>
                         </td>
                         <td>
-                            <div id="rnum2">
+                            <div id="rnum2" class="refNum">
                                 <label for="rnum2">Number:</label>
                                 <input type="text" name="rnum[]" <%if(thirdValue){ if(data5[1]!=undefined){%>
                                 value=" <%=data5[1].ref_contact_number%>"
@@ -1182,7 +1183,7 @@
                             </div>
                         </td>
                         <td>
-                            <div id="refrel2">
+                            <div id="refrel2" class="refName">
                                 <label for="refrel2">Relation:</label>
                                 <input type="text" name="refrel[]" <%if(thirdValue){ if(data5[1]!=undefined){%>
                                 value="<%=data5[1].ref_relation%>"
@@ -1367,11 +1368,12 @@
             </div>
 
             <script>
-                const setError2 = (degree, error, index) => {
-                    let a = document.getElementsByClassName(degree);
+                const setError2 = (degree1, error, index) => {
+                    let a = document.getElementsByClassName(degree1);
                     let b = a[index].getElementsByClassName("formerror");
                     b[0].innerHTML = "*" + error;
                 }
+
                 const updateForm = () => {
                     var a = prompt("Enter a Employee Id:");
                     window.location = `http://localhost:8081/jobApplicationForm1Update?empId=${a}`;
@@ -1469,7 +1471,7 @@
                     var DateOfBirthregex = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/;
                     let DOB = document.forms['myform']["dob"].value;
                     if (DOB == "") {
-                        setError("dob", "please fill DOB!!");
+                        seterror("dob", "please fill DOB!!");
                         returnVal = false;
                     }
                     else if (!DateOfBirthregex.test(DOB)) {
@@ -1598,7 +1600,7 @@
                         console.log("Hello!");
                     }
 
-                     if (cname[1].value != "" || dess[1].value != "" || fdate[1].value != "" || tdate[1].value != "") {
+                    if (cname[1].value != "" || dess[1].value != "" || fdate[1].value != "" || tdate[1].value != "") {
                         if (cname[1].value == "") {
                             seterror("cname2", "please add company_name!!");
                             returnVal = false;
@@ -1656,6 +1658,219 @@
                             seterror("tdate3", "please add correct To date!!");
                             returnVal = false;
                         }
+                    }
+                    var language = document.getElementsByName("language[]");
+                    var read = document.getElementsByName("read[]");
+                    var write = document.getElementsByName("write[]");
+                    var speak = document.getElementsByName("speak[]");
+
+                    var isLang = false;
+                    let i = 0;
+                    language.forEach((e) => {
+                        if (e.checked) {
+                            if (read[i].checked == false && write[i].checked == false && speak[i].checked == false) {
+                                setError2("Lan", "select appropriate options!!", i);
+                                returnVal = false;
+                            }
+                            isLang = true;
+                        }
+                        // console.log("read[i].checked"+read[i].checked);
+                        if (read[i].checked || write[i].checked || speak[i].checked) {
+                            if (e.checked == false) {
+                                setError2("Lan", "select Language first!!", i);
+                                returnVal = false;
+                            }
+                        }
+                        i++;
+                    })
+
+                    if (isLang == false) {
+                        seterror("language", "please select language!!");
+                        returnVal = false;
+                    }
+                    var phptech = document.getElementsByName("l_php");
+                    var mysql = document.getElementsByName("l_mysql");
+                    var laravel = document.getElementsByName("l_laravel");
+                    var oracle = document.getElementsByName("l_oracle");
+
+                    var technology = document.getElementsByName("technology[]");
+                    var isTech = false;
+                    technology.forEach((e) => {
+                        if (e.checked) {
+                            isTech = true;
+                        }
+                        if (e.value == "php" && e.checked) {
+                            var isphpSelected = false;
+                            phptech.forEach((t) => {
+                                if (t.checked) {
+                                    isphpSelected = true;
+                                }
+                            })
+                            if (isphpSelected == false) {
+                                setError2("lanErr", "select php level!", 0);
+                                returnVal = false;
+                            }
+                        }
+                        else if (e.value == "php" && e.checked == false) {
+                            var isphpSelected = false;
+                            phptech.forEach((t) => {
+                                if (t.checked) {
+                                    isphpSelected = true;
+                                }
+                            })
+                            if (isphpSelected) {
+                                setError2("lanErr", "select php!", 0);
+                                returnVal = false;
+                            }
+                        }
+                        if (e.value == "mysql" && e.checked) {
+                            var issqlSelected = false;
+                            mysql.forEach((t2) => {
+                                if (t2.checked) {
+                                    issqlSelected = true;
+                                }
+                            })
+                            if (issqlSelected == false) {
+                                setError2("lanErr", "select mysql level!", 1);
+                                returnVal = false;
+                            }
+                        }
+                        else if (e.value == "mysql" && e.checked == false) {
+                            var issqlSelected = false;
+                            mysql.forEach((t2) => {
+                                if (t2.checked) {
+
+                                    issqlSelected = true;
+
+                                }
+                            })
+                            if (issqlSelected) {
+                                setError2("lanErr", "select mysql!", 1);
+                                returnVal = false;
+                            }
+                        }
+
+                        if (e.value == "laravel" && e.checked) {
+                            var islaravelSelected = false;
+                            laravel.forEach((t2) => {
+                                if (t2.checked) {
+                                    islaravelSelected = true;
+                                }
+                            })
+                            if (islaravelSelected == false) {
+                                setError2("lanErr", "select laravel level!", 2);
+                                returnVal = false;
+                            }
+                        }
+                        else if (e.value == "laravel" && e.checked == false) {
+                            var islaravelSelected = false;
+                            laravel.forEach((t2) => {
+                                if (t2.checked) {
+                                    islaravelSelected = true;
+                                }
+                            })
+                            if (islaravelSelected) {
+                                setError2("lanErr", "select laravel!", 2);
+                                returnVal = false;
+                            }
+                        }
+
+
+                        if (e.value == "oracle" && e.checked) {
+                            var isoracleSelected = false;
+                            oracle.forEach((t2) => {
+                                if (t2.checked) {
+                                    isoracleSelected = true;
+                                }
+                            })
+                            if (isoracleSelected == false) {
+                                setError2("lanErr", "select oracle level!", 3);
+                                returnVal = false;
+                            }
+                        }
+                        else if (e.value == "oracle" && e.checked == false) {
+                            var isoracleSelected = false;
+                            oracle.forEach((t2) => {
+                                if (t2.checked) {
+                                    if (e.value == "oracle" && e.checked == false) {
+                                        isoracleSelected = true;
+                                    }
+                                }
+                            })
+                            if (isoracleSelected) {
+                                setError2("lanErr", "select oracle!", 3);
+                                returnVal = false;
+                            }
+                        }
+                        console.log(e + "technology" + e.value);
+                    })
+                    var refName = document.getElementsByName("nref[]");
+                    var refNum = document.getElementsByName("rnum[]");
+                    var refrel = document.getElementsByName("refrel[]");
+
+                    let l1 = 0;
+                    console.log(refName[1].value);
+
+                    if (refName[0].value != "" || refNum[0].value != "" || refrel[0].value != "") {
+                        if (refName[0].value == "") {
+                            seterror("nref1", "please add reference name!!");
+                            returnVal = false;
+                        }
+                        if (refNum[0].value == "") {
+                            seterror("rnum1", "please add reference number!!");
+                            returnVal = false;
+                        }
+                        if (refrel[0].value == "") {
+                            seterror("refrel1", "please add reference relation!!");
+                            returnVal = false;
+                        }
+                    }
+                    if (refName[1].value != "" || refNum[1].value != "" || refrel[1].value != "") {
+                        if (refName[1].value == "") {
+                            seterror("nref2", "please add reference name!!");
+                            returnVal = false;
+                        }
+                        if (refNum[1].value == "") {
+                            seterror("rnum2", "please add reference number!!");
+                            returnVal = false;
+                        }
+                        if (refrel[1].value == "") {
+                            seterror("refrel2", "please add reference relation!!");
+                            returnVal = false;
+                        }
+                    }
+                    let x1 = document.getElementsByName("plocaton1")[0].value;
+                    let x2 = document.getElementsByName("plocaton2")[0].value;
+                    let x3 = document.getElementsByName("plocaton3")[0].value;
+                    if (x1 == x2 || x1 == x3 || x2 == x3) {
+                        seterror("plocaton", "Preference location must be diffrent!");
+                        returnVal = false;
+                    }
+
+                    var nperiod = document.getElementsByName("nperiod")[0];
+                    console.log(nperiod.value);
+                    if (nperiod.value == "" || nperiod.value == undefined) {
+                        seterror("nperiod", "please add notice period!!");
+                        returnVal = false;
+                    }
+
+                    var c_ctc = document.getElementsByName("c_ctc")[0];
+                    console.log(c_ctc.value);
+                    if (c_ctc.value == "" || c_ctc.value == undefined) {
+                        seterror("c_ctc", "please add current ctc period!!");
+                        returnVal = false;
+                    }
+
+                    var e_ctc = document.getElementsByName("e_ctc")[0];
+                    console.log(e_ctc.value);
+                    if (e_ctc.value == "" || e_ctc.value == undefined) {
+                        seterror("department", "please add expacted ctc period!!");
+                        returnVal = false;
+                    }
+
+                    if (isTech == false) {
+                        seterror("technology", "select Technology!!");
+                        returnVal = false;
                     }
 
                     return returnVal;

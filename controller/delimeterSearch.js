@@ -1,6 +1,7 @@
 var fs = require("fs");
 var con = require("../Connect.js");
 function stuructureSQL(sql) {
+    sql = sql.replace(/\s/g, '');
     if (sql == undefined) {
         return 0;
     }
