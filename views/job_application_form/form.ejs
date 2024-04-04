@@ -365,8 +365,8 @@
                                                 <%}else if(thirdValue && data1[0]!=undefined){%>
                                                     value="<%=data1[0].course_name%>"
                                                         <%}%>
-                                                            >
-
+                                                            ><br><span class="formerror"><b>
+                                                                </b></span>
                                         </div>
                                     </td>
                                     <td>
@@ -725,9 +725,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="formdesign" id="tdate[]">
+                                        <div class="formdesign" id="tdate3">
                                             <label for="tdate3">To:</label>
-                                            <input type="text" name="tdate3" <% if(secondValid && data2.tdate1[2]
+                                            <input type="text" name="tdate[]" <% if(secondValid && data2.tdate1[2]
                                                 !=undefined){%>
                                             value="<%=data2.tdate1[2]%>"
                                                 <%}else if(thirdValue && data2[2]!=undefined){%>
@@ -758,7 +758,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="language" value="hindi" id="hindi"
+                                        <input type="checkbox" name="language[]" value="hindi" id="hindi"
                                             <%if(thirdValue){ data3.map((e)=>{
                                         if(e.language_id==1){%>
                                         checked="checked"
@@ -803,7 +803,7 @@
     </tr>
     <tr>
         <td>
-            <input type="checkbox" name="language" value="english" id="english" <%if(thirdValue){ data3.map((e)=>{
+            <input type="checkbox" name="language[]" value="english" id="english" <%if(thirdValue){ data3.map((e)=>{
             if(e.language_id==2){%>
             checked="checked"
             <%} }) }%>
@@ -845,7 +845,7 @@
     </tr>
     <tr>
         <td>
-            <input type="checkbox" name="language" value="gujarati" id="gujarati" <%if(thirdValue){ data3.map((e)=>{
+            <input type="checkbox" name="language[]" value="gujarati" id="gujarati" <%if(thirdValue){ data3.map((e)=>{
             if(e.language_id==3){%>
             checked="checked"
             <%} }) }%>
@@ -1215,79 +1215,61 @@
                                 <ol>
                                     <li>
                                         <select name="plocaton1" id="plocation1">
-                                            <option value="1" 
-                                            <%if(thirdValue){
-                                                if(data6.preference_location1==1){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                                        >Ahemdabad</option>
-                                            <option value="2"
-                                            <%if(thirdValue){
-                                                if(data6.preference_location1==2){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                            >Surat</option>
-                                            <option value="3"
-                                            <%if(thirdValue){
-                                                if(data6.preference_location1==3){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                            >Rajkot</option>
+                                            <option value="1" <%if(thirdValue){ if(data6.preference_location1==1){%>
+                                                selected
+                                                <%} }%>
+                                                    >Ahemdabad
+                                            </option>
+                                            <option value="2" <%if(thirdValue){ if(data6.preference_location1==2){%>
+                                                selected
+                                                <%} }%>
+                                                    >Surat
+                                            </option>
+                                            <option value="3" <%if(thirdValue){ if(data6.preference_location1==3){%>
+                                                selected
+                                                <%} }%>
+                                                    >Rajkot
+                                            </option>
 
                                         </select>
                                     </li>
                                     <li>
                                         <select name="plocaton2" id="plocation2">
-                                            <option value="1"
-                                            <%if(thirdValue){
-                                                if(data6.preference_location2==1){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                            >Ahemdabad</option>
-                                            <option value="2"
-                                            <%if(thirdValue){
-                                                if(data6.preference_location2==2){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                            >Surat</option>
-                                            <option value="3"
-                                            <%if(thirdValue){
-                                                if(data6.preference_location2==3){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                            >Rajkot</option>
+                                            <option value="1" <%if(thirdValue){ if(data6.preference_location2==1){%>
+                                                selected
+                                                <%} }%>
+                                                    >Ahemdabad
+                                            </option>
+                                            <option value="2" <%if(thirdValue){ if(data6.preference_location2==2){%>
+                                                selected
+                                                <%} }%>
+                                                    >Surat
+                                            </option>
+                                            <option value="3" <%if(thirdValue){ if(data6.preference_location2==3){%>
+                                                selected
+                                                <%} }%>
+                                                    >Rajkot
+                                            </option>
 
                                         </select>
                                     </li>
                                     <li>
                                         <select name="plocaton3" id="plocation3">
-                                            <option value="1"
-                                            <%if(thirdValue){
-                                                if(data6.preference_location3==1){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                            >Ahemdabad</option>
-                                            <option value="2"
-                                            <%if(thirdValue){
-                                                if(data6.preference_location3==2){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                            >Surat</option>
-                                            <option value="3"
-                                            <%if(thirdValue){
-                                                if(data6.preference_location3==3){%>
-                                                    selected
-                                                <%}
-                                            }%>
-                                            >Rajkot</option>
+                                            <option value="1" <%if(thirdValue){ if(data6.preference_location3==1){%>
+                                                selected
+                                                <%} }%>
+                                                    >Ahemdabad
+                                            </option>
+                                            <option value="2" <%if(thirdValue){ if(data6.preference_location3==2){%>
+                                                selected
+                                                <%} }%>
+                                                    >Surat
+                                            </option>
+                                            <option value="3" <%if(thirdValue){ if(data6.preference_location3==3){%>
+                                                selected
+                                                <%} }%>
+                                                    >Rajkot
+                                            </option>
 
                                         </select>
                                     </li>
@@ -1300,17 +1282,15 @@
                                     <td>
                                         <div id="nperiod">
                                             <label for="nperiod">Notice Period:</label>
-                                            <input type="text" name="nperiod"
-                                            <% if(thirdValue){
+                                            <input type="text" name="nperiod" <% if(thirdValue){
                                                 if(data6.notice_period_indays!=undefined){%>
-                                                    value="<%=data6.notice_period_indays%>"
-                                                <%}  
-                                            }%>
-                                            ><span class="formerror"><b>
-                                                    <% if(secondValid==true){%>
-                                                        <%=data1.nperiod_error%>
-                                                            <%}%>
-                                                </b></span>
+                                            value="<%=data6.notice_period_indays%>"
+                                                <%} }%>
+                                                    ><span class="formerror"><b>
+                                                            <% if(secondValid==true){%>
+                                                                <%=data1.nperiod_error%>
+                                                                    <%}%>
+                                                        </b></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -1318,17 +1298,15 @@
                                     <td>
                                         <div id="c_ctc">
                                             <label for="c_ctc">Current CTC:</label>
-                                            <input type="text" name="c_ctc"
-                                            <% if(thirdValue){
+                                            <input type="text" name="c_ctc" <% if(thirdValue){
                                                 if(data6.current_ctc!=undefined){%>
-                                                    value="<%=data6.current_ctc%>"
-                                                <%}  
-                                            }%>
-                                            ><span class="formerror"><b>
-                                                    <% if(secondValid==true){%>
-                                                        <%=data1.c_ctc_error%>
-                                                            <%}%>
-                                                </b></span>
+                                            value="<%=data6.current_ctc%>"
+                                                <%} }%>
+                                                    ><span class="formerror"><b>
+                                                            <% if(secondValid==true){%>
+                                                                <%=data1.c_ctc_error%>
+                                                                    <%}%>
+                                                        </b></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -1336,18 +1314,15 @@
                                     <td>
                                         <div class="formdesign" id="department">
                                             <label for="e_ctc">Expacted CTC:</label>
-                                            <input type="text" id="e_ctc" name="e_ctc"
-                                            <% if(thirdValue){
+                                            <input type="text" id="e_ctc" name="e_ctc" <% if(thirdValue){
                                                 if(data6.expected_ctc!=undefined){%>
-                                                    value="<%=data6.expected_ctc%>"
-                                                <%}  
-                                            }%>
-                                            ><spa
-                                            ><span class="formerror"><b>
-                                                    <% if(secondValid==true){%>
-                                                        <%=data1.e_ctc_error%>
-                                                            <%}%>
-                                                </b></span>
+                                            value="<%=data6.expected_ctc%>"
+                                                <%} }%>
+                                                    ><spa><span class="formerror"><b>
+                                                                <% if(secondValid==true){%>
+                                                                    <%=data1.e_ctc_error%>
+                                                                        <%}%>
+                                                            </b></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -1358,20 +1333,14 @@
                                 <label for="dapartment">Department:</label>
 
                                 <select name="department">
-                                    <option value="design"
-                                    <% if(thirdValue){
-                                        if(data6.department=="design"){%>
-                                            value="<%=data6.department%>"
-                                        <%}  
-                                    }%>
-                                    >Design</option>
-                                    <option value="marketing"
-                                    <% if(thirdValue){
-                                        if(data6.marketing=="marketing"){%>
-                                            value="<%=data6.marketing%>"
-                                        <%}  
-                                    }%>
-                                    >Marketing</option>
+                                    <option value="design" <% if(thirdValue){ if(data6.department=="design" ){%>
+                                        value="<%=data6.department%>"
+                                            <%} }%>
+                                                >Design</option>
+                                    <option value="marketing" <% if(thirdValue){ if(data6.marketing=="marketing" ){%>
+                                        value="<%=data6.marketing%>"
+                                            <%} }%>
+                                                >Marketing</option>
 
                                 </select>
                                 <br><span class="formerror"><b>
@@ -1390,19 +1359,309 @@
     <input type="text" name="varification" value="<%=thirdValue%>" style="display:none">
     <%if(thirdValue==true){%>
         <input type="text" value="<%=empId%>" name="empId" style="display:none">
-    <%}%>
-    <div class="con">
-        <input type="submit" value="submit">
-    </div>
-    </form>
-    </div>
-    <script src="/job_application_form/form.js"></script>
-    <script>
-        const updateForm = () => {
-            var a = prompt("Enter a Employee Id:");
-            window.location = `http://localhost:8081/jobApplicationForm1Update?empId=${a}`;
-        }
-    </script>
+        <%}%>
+            <div class="con">
+                <input type="submit" value="submit">
+            </div>
+            </form>
+            </div>
+
+            <script>
+                const setError2 = (degree, error, index) => {
+                    let a = document.getElementsByClassName(degree);
+                    let b = a[index].getElementsByClassName("formerror");
+                    b[0].innerHTML = "*" + error;
+                }
+                const updateForm = () => {
+                    var a = prompt("Enter a Employee Id:");
+                    window.location = `http://localhost:8081/jobApplicationForm1Update?empId=${a}`;
+                }
+                function seterror(id, error) {
+                    var varId = document.getElementById(id);
+                    varId.getElementsByClassName("formerror")[0].innerHTML = "*" + error;
+                }
+                function validateForm() {
+                    var returnVal = true;
+                    let fname = document.forms["myform"]["fname"].value;
+
+                    if (fname.length < 3) {
+                        seterror("fname", "First name is too short!!");
+                        returnVal = false;
+                    }
+                    if (fname == "") {
+                        seterror("fname", "please enter first name!");
+                        returnVal = false;
+                    }
+                    let lname = document.forms["myform"]["lname"].value;
+                    if (lname.length < 3) {
+                        seterror("lname", "Last name is too short!!");
+                        returnVal = false;
+                    }
+                    if (lname == "") {
+                        seterror("lname", "please enter last name!");
+                        returnVal = false;
+                    }
+
+                    let des = document.forms["myform"]["des"].value;
+                    if (des.length < 3) {
+                        seterror("des", "Desination is too short!!");
+                        returnVal = false;
+                    }
+                    if (des == "") {
+                        seterror("des", "please enter Designation!");
+                        returnVal = false;
+                    }
+
+                    let add1 = document.forms["myform"]["add1"].value;
+                    if (add1.length < 3) {
+                        seterror("add1", "address is too short!!");
+                        returnVal = false;
+                    }
+                    if (add1 == "") {
+                        seterror("add1", "please enter address!");
+                        returnVal = false;
+                    }
+
+                    let add2 = document.forms["myform"]["add2"].value;
+                    if (add2.length < 3) {
+                        seterror("add2", "address is too short!!");
+                        returnVal = false;
+                    }
+                    if (add2 == "") {
+                        seterror("add2", "please enter address!");
+                        returnVal = false;
+                    }
+
+                    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                    var email = document.forms['myform']["email"].value;
+                    if (!emailRegex.test(email)) {
+                        seterror("email", "please enter a valid email!");
+                        returnVal = false;
+                    }
+
+                    let city = document.forms["myform"]["city"].value;
+                    if (city == "") {
+                        seterror("city", "please enter City!");
+                        returnVal = false;
+                    }
+
+                    let number = document.forms["myform"]["number"].value;
+                    let numberRegex = /[0-9]{10}/;
+                    if (!numberRegex.test(number)) {
+                        seterror("number", "Please enter a valid phone number");
+                        returnVal = false;
+                    }
+
+                    var gender = document.forms['myform']["gender_combo"].value;
+                    if (gender == "") {
+                        seterror("gender", "You need to select gender!");
+                        returnVal = false;
+                    }
+
+
+                    var pincodeRegex = /[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}/;
+                    let pincode = document.forms['myform']["zcode"].value;
+                    if (!pincodeRegex.test(pincode)) {
+                        seterror("zcode", "Please enter valid Zip Code!!");
+                        returnVal = false;
+                    }
+
+                    var DateOfBirthregex = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/;
+                    let DOB = document.forms['myform']["dob"].value;
+                    if (DOB == "") {
+                        setError("dob", "please fill DOB!!");
+                        returnVal = false;
+                    }
+                    else if (!DateOfBirthregex.test(DOB)) {
+                        seterror("dob", "Please enter valid Date Of Birth");
+                        returnVal = false;
+                    }
+
+                    var degree = document.getElementsByName("degree[]");
+                    var pyear = document.getElementsByName("pyear[]");
+                    var perc = document.getElementsByName("perc[]");
+
+                    if (degree[0].value == "" || degree[0].value == undefined) {
+                        seterror("sboard", "please set ssc!!");
+                        returnVal = false;
+                    }
+
+                    let pYearRegex = /[0-9]{4}/;
+                    if (pyear[0].value == "" || pyear[0].value == undefined) {
+                        seterror("spyear", "please add passing year!!");
+                        returnVal = false;
+                    }
+                    else if (pYearRegex.test(pyear[0].value) == false) {
+                        seterror("spyear", "please correct passing year!!");
+                        returnVal = false;
+                    }
+
+                    if (perc[0].value == "") {
+                        seterror("sper", "please add ssc percentage!!");
+                        returnVal = false;
+                    }
+
+                    if (degree[1].value == "" || degree[1].value == undefined) {
+                        seterror("hboard", "please set hsc!!");
+                        returnVal = false;
+                    }
+
+                    if (pyear[1].value == "" || pyear[1].value == undefined) {
+                        seterror("hpyear", "please add passing year!!");
+                        returnVal = false;
+                    }
+                    else if (pYearRegex.test(pyear[1].value) == false) {
+                        seterror("hpyear", "please correct passing year!!");
+                        returnVal = false;
+                    }
+
+                    if (perc[1].value == "") {
+                        seterror("hper", "please add hsc percentage!!");
+                        returnVal = false;
+                    }
+
+
+                    if (degree[2].value == "" || degree[2].value == undefined) {
+                        seterror("bcourse", "please set bachlor details!!");
+                        returnVal = false;
+                    }
+
+                    if (pyear[2].value == "" || pyear[2].value == undefined) {
+                        seterror("bpyear", "please add passing year!!");
+                        returnVal = false;
+                    }
+                    else if (pYearRegex.test(pyear[2].value) == false) {
+                        seterror("bpyear", "please correct passing year!!");
+                        returnVal = false;
+                    }
+
+                    if (perc[2].value == "") {
+                        seterror("bper", "please add bachlor percentage!!");
+                        returnVal = false;
+                    }
+
+
+                    if (degree[3].value != "" || pyear[3].value != "" || perc[3].value != "") {
+                        if (degree[3].value == "" || degree[3].value == undefined) {
+                            seterror("mcourse", "please set master details!!");
+                            returnVal = false;
+                        }
+
+                        if (pyear[3].value == "" || pyear[3].value == undefined) {
+                            seterror("mpyear", "please add passing year!!");
+                            returnVal = false;
+                        }
+                        else if (pYearRegex.test(pyear[3].value) == false) {
+                            seterror("mpyear", "please correct passing year!!");
+                            returnVal = false;
+                        }
+
+                        if (perc[3].value == "") {
+                            seterror("mper", "please add master percentage!!");
+                            returnVal = false;
+                        }
+                    }
+                    //var cname1 = document.getElementById("cname[]")
+                    var cname = document.getElementsByName("cname[]");
+                    var dess = document.getElementsByName("dess[]");
+                    var fdate = document.getElementsByName("fdate[]");
+                    var tdate = document.getElementsByName("tdate[]");
+                    // console.log(cname[0].value);
+                    if (cname[0].value != "" || dess[0].value != "" || fdate[0].value != "" || tdate[0].value != "") {
+                        if (cname[0].value == "") {
+                            seterror("cname1", "please add company_name!!");
+                            returnVal = false;
+                        }
+
+                        if (dess[0].value == "") {
+                            seterror("des1", "please add designation!!");
+                            returnVal = false;
+                        }
+
+                        if (fdate[0].value == "") {
+                            seterror("fdate1", "plase add from date!!");
+                            returnVal = false;
+                        }
+                        else if (pYearRegex.test(fdate[0].value) == false) {
+                            seterror("fdate1", "please add correct From date!!");
+                            returnVal = false;
+                        }
+
+                        if (tdate[0].value == "") {
+                            seterror("tdate1", "please add to date!!");
+                            returnVal = false;
+                        }
+                        else if (pYearRegex.test(tdate[0].value) == false) {
+                            seterror("tdate1", "please add correct To date!!");
+                            returnVal = false;
+                        }
+                        console.log("Hello!");
+                    }
+
+                     if (cname[1].value != "" || dess[1].value != "" || fdate[1].value != "" || tdate[1].value != "") {
+                        if (cname[1].value == "") {
+                            seterror("cname2", "please add company_name!!");
+                            returnVal = false;
+                        }
+
+                        if (dess[1].value == "") {
+                            seterror("des2", "please add designation!!");
+                            returnVal = false;
+                        }
+
+                        if (fdate[1].value == "") {
+                            seterror("fdate2", "plase add from date!!");
+                            returnVal = false;
+                        }
+                        else if (pYearRegex.test(fdate[1].value) == false) {
+                            seterror("fdate2", "please add correct From date!!");
+                            returnVal = false;
+                        }
+
+                        if (tdate[1].value == "") {
+                            seterror("tdate2", "please add to date!!");
+                            returnVal = false;
+                        }
+                        else if (pYearRegex.test(tdate[1].value) == false) {
+                            seterror("tdate2", "please add correct To date!!");
+                            returnVal = false;
+                        }
+                    }
+
+                    if (cname[2].value != "" || dess[2].value != "" || fdate[2].value != "" || tdate[2].value != "") {
+                        if (cname[2].value == "") {
+                            seterror("cname3", "please add company_name!!");
+                            returnVal = false;
+                        }
+
+                        if (dess[2].value == "") {
+                            seterror("des3", "please add designation!!");
+                            returnVal = false;
+                        }
+
+                        if (fdate[2].value == "") {
+                            seterror("fdate3", "plase add from date!!");
+                            returnVal = false;
+                        }
+                        else if (pYearRegex.test(fdate[2].value) == false) {
+                            seterror("fdate3", "please add correct From date!!");
+                            returnVal = false;
+                        }
+
+                        if (tdate[2].value == "") {
+                            seterror("tdate3", "please add to date!!");
+                            returnVal = false;
+                        }
+                        else if (pYearRegex.test(tdate[2].value) == false) {
+                            seterror("tdate3", "please add correct To date!!");
+                            returnVal = false;
+                        }
+                    }
+
+                    return returnVal;
+                }
+
+            </script>
 </body>
 
 </html>

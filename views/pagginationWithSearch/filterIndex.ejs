@@ -28,10 +28,10 @@
                             </div>
 
                             <div id="arrow">
-                                <div class="arrowUp" onclick="OrderAec(`<%=e.name%>`)"><img src="arrow-up-short.svg"
+                                <div class="arrowUp" onclick="OrderAec(`<%=e.name%>`)"><img src="/pagginationWithSearch/arrow-up-short.svg"
                                         alt=""></div>
                                 <div class="arrowDown" onclick="OrderDesc(`<%=e.name%>`)"><img
-                                        src="arrow-down-short.svg" alt=""></div>
+                                        src="/pagginationWithSearch/arrow-down-short.svg" alt=""></div>
                             </div>
                         </div>
                     </th>
@@ -76,10 +76,10 @@
         currentPage = 1;
 
         function goHome() {
-            window.location = `http://localhost:8080`;
+            window.location = `http://localhost:8081/task/?taskName=PaginationWithSearch`;
         }
         function goBack() {
-            window.location = `http://localhost:8080/?page=${currentPage}&query=${`<%=query%>`}&parms=1&secondP=1`;
+            window.location = `http://localhost:8081/task?taskName=startFilter&page=${currentPage}&query=${`<%=query%>`}&parms=1&secondP=1`;
         }
 
         currentPage = Number(document.getElementById("pageCount").innerHTML);
@@ -103,7 +103,7 @@
             if (currentPage > maxPages || currentPage < 1) {
                 return 0;
             }
-            window.location = `http://localhost:8080/startFilter?page=${currentPage}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
+            window.location = `http://localhost:8081/task?taskName=startFilter&page=${currentPage}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
 
         }
 
@@ -117,7 +117,7 @@
                 return 0;
             }
 
-            window.location = `http://localhost:8080/startFilter?page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
+            window.location = `http://localhost:8081/task?taskName=startFilter&page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
         }
         function onlast() {
             let o = document.getElementById('order').innerHTML;
@@ -126,7 +126,7 @@
             if (currentPage >= maxPages) {
                 return 0;
             }
-            window.location = `http://localhost:8080/startFilter?page=${maxPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
+            window.location = `http://localhost:8081/task?taskName=startFilter&page=${maxPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${orderBy}&order=${o}`;
         }
         function OrderAec(value) {
             let order = document.getElementById('order').innerHTML;
@@ -143,7 +143,7 @@
                 o = "ASC";
             }
             currentPage = Number(document.getElementById("pageCount").innerHTML);
-            window.location = `http://localhost:8080/startFilter?page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${column}&order=${o}`;
+            window.location = `http://localhost:8081/task?taskName=startFilter&page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${column}&order=${o}`;
         }
         function OrderDesc(value) {
             let order = document.getElementById('order').innerHTML;
@@ -160,7 +160,7 @@
                 o = "DESC";
             }
             currentPage = Number(document.getElementById("pageCount").innerHTML);
-            window.location = `http://localhost:8080/startFilter?page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${column}&order=${o}`;
+            window.location = `http://localhost:8081/task?taskName=startFilter&page=${minPages}&data1=${`<%=dataa1%>`}&data2=${`<%=dataa2%>`}&data3=${`<%=dataa3%>`}&data4=${`<%=dataa4%>`}&data5=${`<%=dataa5%>`}&query=${`<%=query%>`}&orderBy=${column}&order=${o}`;
         }
     </script>
 </body>

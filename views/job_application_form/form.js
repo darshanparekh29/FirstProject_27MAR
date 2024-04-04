@@ -3,7 +3,7 @@ function seterror(id, error) {
     varId.getElementsByClassName("formerror")[0].innerHTML = "*" + error;
 }
 function validateForm() {
-
+    var returnVal = true;
     let fname = document.forms["myform"]["fname"].value;
 
     if (fname.length < 3) {

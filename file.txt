@@ -1,0 +1,1 @@
+select student_id,first_name,last_name,father_name,mother_name,gender,email,city,p_number,em_number from student_master
